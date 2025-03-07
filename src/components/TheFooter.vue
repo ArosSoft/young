@@ -1,4 +1,3 @@
-
 <template>
   <footer class="footer">
     <div class="footer-content">
@@ -24,6 +23,13 @@ const currentYear = new Date().getFullYear();
   border-top: 1px solid var(--color-border);
 }
 
+.footer {
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+    background-color: var(--color-background-soft);
+    border-top: 1px solid var(--color-border);
+  }
+  
 .footer-content {
   text-align: center;
 }

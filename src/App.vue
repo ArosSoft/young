@@ -3,7 +3,7 @@
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="ку" />
+      <HelloWorld msg="Привет" />
 
       <nav>
         <router-link to="/">Домой</router-link> |
@@ -16,9 +16,7 @@
   <main>
     <router-view />
   </main>
-  <footer>
-    <p>&copy; 2023 My Company</p>
-  </footer>
+  <TheFooter />
 </template>
 
 <style scoped>
@@ -51,12 +49,6 @@ nav a:first-of-type {
 nav a.router-link-active {
   color: var(--color-text);
   font-weight: bold;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  border-top: 1px solid #eee;
 }
 
 @media (min-width: 1024px) {
@@ -97,8 +89,17 @@ footer {
     flex: 1;
   }
 }
+
+  :root {
+    --color-background-soft: #f0f0f0;
+    --color-border: #ddd;
+    --color-text: #333;
+  }
+
+  
 </style>
 
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import TheFooter from './components/TheFooter.vue'
 </script>
