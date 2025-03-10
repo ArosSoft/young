@@ -1,14 +1,17 @@
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="logo" class="logo" src="./assets/logo.png" width="200" height="200" />
 
     <div class="wrapper">
-      <HelloWorld msg="1 программист написал это" />
+      <HelloWorld msg="НАЗВАНИЕ САЙТА" />
 
       <nav>
-        <router-link to="/">Домой</router-link> |
+        <router-link to="/">Все проекты</router-link> |
         <router-link to="/about">О нас</router-link> |
-        <router-link to="/welcome">Добро пожаловать</router-link>
+        <router-link to="/neuroart">Нейроарт</router-link> |
+        <router-link to="/graffity">Граффити Липецка</router-link> |
+        <router-link to="/volunt">Благоустройство Липецка глазами молодежи</router-link> |
+        <router-link to="/welcome">Приглашаем к сотрудничеству</router-link>
       </nav>
     </div>
   </header>
