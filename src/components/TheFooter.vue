@@ -3,9 +3,9 @@
     <div class="footer-content">
       <p>&copy; {{ currentYear }} Моё приложение. Все права защищены.</p>
       <div class="footer-links">
-        <a href="#">Условия использования</a> |
+        <a href="#">Условия пользователя</a> |
         <a href="#">Политика конфиденциальности</a> |
-        <a href="#">Контакты</a>
+        <a href="#">Контакты разработчиков</a>
       </div>
     </div>
   </footer>
