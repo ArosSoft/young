@@ -1,13 +1,10 @@
 <template>
   <header>
-    <!-- Логотип сайта -->
     <img alt="logo" class="logo" src="./assets/logo.jfif" width="320" height="250" />
 
     <div class="wrapper">
-      <!-- Компонент HelloWorld с заголовком "ИДЕИ МОЛОДЕЖИ" -->
       <HelloWorld msg="ИДЕИ МОЛОДЕЖИ" />
 
-      <!-- Навигационное меню -->
       <nav>
         <router-link to="/">Домой</router-link> |
         <router-link to="/about">О нас</router-link> |
@@ -16,28 +13,22 @@
     </div>
   </header>
 
-  <!-- Основное содержимое страницы, которое будет меняться в зависимости от маршрута -->
   <main>
     <router-view />
   </main>
-
-  <!-- Футер сайта -->
   <TheFooter />
 </template>
 
 <style scoped>
-/* Стили для шапки сайта */
 header {
   line-height: 1.5;
 }
 
-/* Стили для логотипа */
 .logo {
   display: block;
   margin: 0 auto 2rem;
 }
 
-/* Стили для навигационного меню */
 nav {
   width: 100%;
   font-size: 16px;
@@ -45,25 +36,21 @@ nav {
   margin-top: 2rem;
 }
 
-/* Стили для ссылок в навигационном меню */
 nav a {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
 }
 
-/* Убираем границу у первой ссылки */
 nav a:first-of-type {
   border: 0;
 }
 
-/* Стили для активной ссылки в навигационном меню */
 nav a.router-link-active {
   color: var(--color-text);
   font-weight: bold;
 }
 
-/* Адаптивные стили для экранов шириной более 1024px */
 @media (min-width: 1024px) {
   body {
     min-height: 100vh;
@@ -103,16 +90,16 @@ nav a.router-link-active {
   }
 }
 
-/* Определение кастомных CSS переменных */
-:root {
-  --color-background-soft: #f0f0f0;
-  --color-border: #ddd;
-  --color-text: #333;
-}
+  :root {
+    --color-background-soft: #f0f0f0;
+    --color-border: #ddd;
+    --color-text: #333;
+  }
+
+  
 </style>
 
 <script setup>
-// Импорт компонентов
 import HelloWorld from './components/HelloWorld.vue'
 import TheFooter from './components/TheFooter.vue'
 </script>

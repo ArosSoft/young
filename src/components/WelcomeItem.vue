@@ -1,84 +1,98 @@
 <template>
+  <!-- Основной блок элемента с классом "item" -->
   <div class="item">
+    <!-- Блок для иконки, которая передается через слот "icon" -->
     <i>
       <slot name="icon"></slot>
     </i>
+    <!-- Блок для деталей элемента -->
     <div class="details">
+      <!-- Заголовок элемента, который передается через слот "heading" -->
       <h3>
         <slot name="heading"></slot>
       </h3>
+      <!-- Основной контент элемента, который передается через слот по умолчанию -->
       <slot></slot>
     </div>
   </div>
 </template>
 
 <style scoped>
+/* Стили для элемента "item" */
 .item {
-  margin-top: 2rem;
-  display: flex;
+  margin-top: 2rem; /* Отступ сверху */
+  display: flex; /* Использование flexbox для выравнивания содержимого */
 }
 
+/* Стили для блока "details" */
 .details {
-  flex: 1;
-  margin-left: 1rem;
+  flex: 1; /* Занимает все доступное пространство */
+  margin-left: 1rem; /* Отступ слева */
 }
 
+/* Стили для иконки */
 i {
   display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-
-  color: var(--color-text);
+  place-items: center; /* Выравнивание содержимого по центру по вертикали */
+  place-content: center; /* Выравнивание содержимого по центру по горизонтали */
+  width: 32px; /* Ширина иконки */
+  height: 32px; /* Высота иконки */
+  color: var(--color-text); /* Цвет иконки, используя CSS переменную */
 }
 
+/* Стили для заголовка h3 */
 h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  color: var(--color-heading);
+  font-size: 1.2rem; /* Размер шрифта */
+  font-weight: 500; /* Насыщенность шрифта */
+  margin-bottom: 0.4rem; /* Отступ снизу */
+  color: var(--color-heading); /* Цвет заголовка, используя CSS переменную */
 }
 
+/* Адаптивные стили для экранов с шириной более 1024px */
 @media (min-width: 1024px) {
   .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
+    margin-top: 0; /* Убираем отступ сверху */
+    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2); /* Внутренние отступы */
   }
 
+  /* Стили для иконки на больших экранах */
   i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
+    top: calc(50% - 25px); /* Позиционирование иконки по вертикали */
+    left: -26px; /* Позиционирование иконки по горизонтали */
+    position: absolute; /* Абсолютное позиционирование */
+    border: 1px solid var(--color-border); /* Граница иконки */
+    background: var(--color-background); /* Фон иконки */
+    border-radius: 8px; /* Закругление углов */
+    width: 50px; /* Ширина иконки */
+    height: 50px; /* Высота иконки */
   }
 
+  /* Псевдоэлемент для создания вертикальной линии перед элементом */
   .item:before {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
+    content: ' '; /* Пустое содержимое */
+    border-left: 1px solid var(--color-border); /* Вертикальная линия */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 0; /* Позиционирование слева */
+    bottom: calc(50% + 25px); /* Позиционирование по вертикали */
+    height: calc(50% - 25px); /* Высота линии */
   }
 
+  /* Псевдоэлемент для создания вертикальной линии после элемента */
   .item:after {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
+    content: ' '; /* Пустое содержимое */
+    border-left: 1px solid var(--color-border); /* Вертикальная линия */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 0; /* Позиционирование слева */
+    top: calc(50% + 25px); /* Позиционирование по вертикали */
+    height: calc(50% - 25px); /* Высота линии */
   }
 
+  /* Убираем линию перед первым элементом */
   .item:first-of-type:before {
     display: none;
   }
 
+  /* Убираем линию после последнего элемента */
   .item:last-of-type:after {
     display: none;
   }
