@@ -1,6 +1,6 @@
 <template>
   <header>
-    <img alt="logo" class="logo" src="./assets/logo.png" width="320" height="391" />
+    <img alt="logo" class="logo" src="./assets/logo.jfif" width="320" height="250" />
 
     <div class="wrapper">
       <HelloWorld msg="ИДЕИ МОЛОДЕЖИ" />
