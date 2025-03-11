@@ -1,9 +1,9 @@
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="logo" class="logo" src="./assets/logo.png" width="320" height="391" />
 
     <div class="wrapper">
-      <HelloWorld msg="1 программист написал это" />
+      <HelloWorld msg="ИДЕИ МОЛОДЕЖИ" />
 
       <nav>
         <router-link to="/">Домой</router-link> |
