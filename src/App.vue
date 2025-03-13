@@ -11,7 +11,9 @@
       <nav>
         <router-link to="/">Домой</router-link> |
         <router-link to="/about">О нас</router-link> |
-        <router-link to="/welcome">Идеи молодежи</router-link>
+        <router-link to="/welcome">Идеи молодежи</router-link> |
+        <router-link to="/neuroart">Нейро-Арт</router-link> |
+        <router-link to="/graffiti">Граффити</router-link>
       </nav>
     </div>
   </header>
@@ -115,4 +117,5 @@ nav a.router-link-active {
 // Импорт компонентов
 import HelloWorld from './components/HelloWorld.vue'
 import TheFooter from './components/TheFooter.vue'
+//import Neuroart from './components/Neuroart.vue'
 </script>
