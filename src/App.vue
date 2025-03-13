@@ -11,7 +11,7 @@
       <nav>
         <router-link to="/">Домой</router-link> |
         <router-link to="/about">О нас</router-link> |
-        <router-link to="/welcome">Добро пожаловать</router-link>
+        <router-link to="/welcome">Идеи молодежи</router-link>
       </nav>
     </div>
   </header>
