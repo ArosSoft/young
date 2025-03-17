@@ -18,6 +18,10 @@ import ImageModal from './ImageModal.vue';
     <ImageModal imageSrc="./images/Image.jpg" imageWidth="150px"/>
   </div>
 
+<div>
+    <ImageModal imageSrc="./images/Imagevag.jpg" imageWidth="150px"/>
+  </div>
+
   <!-- Компонент WelcomeItem для отображения раздела "Documentation" -->
   <WelcomeItem>
     <!-- Иконка для раздела "Documentation" -->
