@@ -4,9 +4,8 @@
     "\\public",
     "\\public\\text",
     "\\src",
-    "\\src\\components",
     "\\src\\router"
   ],
-  "SelectedNode": "\\src\\components\\MoreButton.vue",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }

@@ -36,7 +36,7 @@ header {
 /* Стили для логотипа */
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1rem;
 }
 
 /* Стили для навигационного меню */
@@ -44,7 +44,7 @@ nav {
   width: 100%;
   font-size: 16px;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 /* Стили для ссылок в навигационном меню */
