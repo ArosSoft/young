@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
+    "\\public\\text",
     "\\src",
     "\\src\\components",
     "\\src\\router"
   ],
-  "SelectedNode": "\\vite.config.js",
+  "SelectedNode": "\\src\\components\\MoreButton.vue",
   "PreviewInSolutionExplorer": false
 }

@@ -4,8 +4,8 @@
             <!-- Изображение -->
             <img :src="imageSrc" alt="Image" class="image" v-if="imageSrc" />
             <div class="text">
-                <!-- Текст от начала до второго # -->
-                <div v-if="initialText" v-html="initialText"></div>
+                <!-- Первый абзац текста в формате markdown -->
+                <div v-if="firstParagraph" v-html="firstParagraph"></div>
                 <!-- Кнопка -->
                 <button @click="toggleDetails">
                     {{ buttonText }}
@@ -39,7 +39,7 @@ export default {
     return {
       showDetails: false,
       description: '', // Полный текст из файла
-      initialText: '', // Текст от начала до второго #
+      firstParagraph: '', // Первый абзац текста в формате HTML
       buttonText: 'подробнее'
     };
   },
@@ -59,18 +59,18 @@ export default {
         this.loadFullDescription();
       }
     },
-    // Загрузка текста от начала до второго # при монтировании компонента
-    async loadInitialText() {
+    // Загрузка первого абзаца при монтировании компонента
+    async loadFirstParagraph() {
       try {
         const response = await fetch(`/${this.fileName}`);
         if (!response.ok) throw new Error('Ошибка загрузки файла');
         const text = await response.text();
-        // Извлекаем текст от начала до второго #
-        const initialText = this.extractInitialText(text);
-        this.initialText = marked(initialText); // Преобразуем в HTML
+        // Извлекаем первый абзац и преобразуем его в markdown
+        const firstParagraphText = this.extractFirstParagraph(text);
+        this.firstParagraph = marked(firstParagraphText); // Преобразуем в HTML
       } catch (error) {
         console.error('Ошибка:', error);
-        this.initialText = marked('Не удалось загрузить описание.'); // Преобразуем в HTML
+        this.firstParagraph = marked('Не удалось загрузить описание.'); // Преобразуем в HTML
       }
     },
     // Загрузка полного описания
@@ -84,34 +84,16 @@ export default {
         this.description = 'Не удалось загрузить описание.';
       }
     },
-    // Метод для извлечения текста от начала до второго #
-    extractInitialText(text) {
-      // Ищем второе вхождение #
-      const secondHeaderIndex = this.findNthOccurrence(text, '#', 2);
-      // Если второе вхождение найдено, берем текст до него
-      if (secondHeaderIndex !== -1) {
-        return text.slice(0, secondHeaderIndex).trim();
-      }
-      // Если второго # нет, возвращаем весь текст
-      return text.trim();
-    },
-    // Метод для поиска n-го вхождения символа
-    findNthOccurrence(text, char, n) {
-      let count = 0;
-      for (let i = 0; i < text.length; i++) {
-        if (text[i] === char) {
-          count++;
-          if (count === n) {
-            return i;
-          }
-        }
-      }
-      return -1; // Если n-ное вхождение не найдено
+    // Метод для извлечения первого абзаца
+    extractFirstParagraph(text) {
+      // Ищем первый абзац (текст до двух переносов строк)
+      const firstParagraphMatch = text.match(/^(.*?)\n\n/s);
+      return firstParagraphMatch ? firstParagraphMatch[1].trim() : text.trim();
     }
   },
-  // Загружаем текст от начала до второго # при монтировании компонента
+  // Загружаем первый абзац при монтировании компонента
   mounted() {
-    this.loadInitialText();
+    this.loadFirstParagraph();
   }
 };
 </script>
