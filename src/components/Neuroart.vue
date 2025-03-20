@@ -9,16 +9,24 @@ import SupportIcon from './icons/IconSupport.vue' // Иконка для под�
 
 
 import ImageModal from './ImageModal.vue';
+import MoreButton from './MoreButton.vue';
 
 </script>
 
 <template>
 
-<div>
-    <ImageModal imageSrc="./images/Image.jpg" imageWidth="150px"/>
+  <div id="morebutton">
+    <h1>Пример использования MoreButton</h1>
+    <!-- Используем компонент с указанием файла -->
+    <MoreButton fileName="./text/описание.txt" />
+    <!-- Можно использовать другой файл -->
+    <MoreButton fileName="./text/другое-описание.txt" />
   </div>
 
- HEAD
+<div>
+    <ImageModal imageSrc="./images/Image.jpg" imageWidth="150px"/>
+</div>
+
 <div>
     <ImageModal imageSrc="./images/Imagevag.jpg" imageWidth="150px"/>
   </div>
@@ -29,8 +37,6 @@ import ImageModal from './ImageModal.vue';
     <ImageModal imageSrc="./images/Image1.jpg" imageWidth="150px"/>
   </div>
 
-
- 40ca9ce70dd9479de47eb9ec125117f2be08b62f
   <!-- Компонент WelcomeItem для отображения раздела "Documentation" -->
   <WelcomeItem>
     <!-- Иконка для раздела "Documentation" -->
@@ -48,3 +54,14 @@ import ImageModal from './ImageModal.vue';
 
 
 </template>
+
+<style>
+#morebutton {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
