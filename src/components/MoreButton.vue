@@ -20,100 +20,101 @@
 </template>
 
 <script>
-import { marked } from 'marked';
+    import MarkdownIt from 'markdown-it';
 
-export default {
-  name: 'MoreButton',
-  props: {
-    fileName: {
-      type: String,
-      required: true,
-      default: 'описание.txt'
-    },
-    imageSrc: {
-      type: String,
-      default: '' // Путь к изображению (необязательный параметр)
-    }
-  },
-  data() {
-    return {
-      showDetails: false,
-      description: '', // Полный текст из файла
-      initialText: '', // Текст от начала до второго #
-      buttonText: 'подробнее'
-    };
-  },
-  computed: {
-    // Преобразуем markdown в HTML для полного описания
-    formattedDescription() {
-      return marked(this.description);
-    }
-  },
-  methods: {
-    toggleDetails() {
-      this.showDetails = !this.showDetails;
-      this.buttonText = this.showDetails ? 'свернуть' : 'подробнее';
+    export default {
+        name: 'MoreButton',
+        props: {
+            fileName: {
+                type: String,
+                required: true,
+                default: 'описание.txt'
+            },
+            imageSrc: {
+                type: String,
+                default: '' // Путь к изображению (необязательный параметр)
+            }
+        },
+        data() {
+            return {
+                showDetails: false,
+                description: '', // Полный текст из файла
+                initialText: '', // Текст от начала до второго #
+                buttonText: 'подробнее',
+                md: new MarkdownIt() // Инициализация markdown-it
+            };
+        },
+        computed: {
+            // Преобразуем markdown в HTML для полного описания
+            formattedDescription() {
+                return this.md.render(this.description);
+            }
+        },
+        methods: {
+            toggleDetails() {
+                this.showDetails = !this.showDetails;
+                this.buttonText = this.showDetails ? 'свернуть' : 'подробнее';
 
-      // Загружаем полное описание только при первом нажатии
-      if (this.showDetails && !this.description) {
-        this.loadFullDescription();
-      }
-    },
-    // Загрузка текста от начала до второго # при монтировании компонента
-    async loadInitialText() {
-      try {
-        const response = await fetch(`/${this.fileName}`);
-        if (!response.ok) throw new Error('Ошибка загрузки файла');
-        const text = await response.text();
-        // Извлекаем текст от начала до второго #
-        const initialText = this.extractInitialText(text);
-        this.initialText = marked(initialText); // Преобразуем в HTML
-      } catch (error) {
-        console.error('Ошибка:', error);
-        this.initialText = marked('Не удалось загрузить описание.'); // Преобразуем в HTML
-      }
-    },
-    // Загрузка полного описания
-    async loadFullDescription() {
-      try {
-        const response = await fetch(`/${this.fileName}`);
-        if (!response.ok) throw new Error('Ошибка загрузки файла');
-        this.description = await response.text();
-      } catch (error) {
-        console.error('Ошибка:', error);
-        this.description = 'Не удалось загрузить описание.';
-      }
-    },
-    // Метод для извлечения текста от начала до второго #
-    extractInitialText(text) {
-      // Ищем второе вхождение #
-      const secondHeaderIndex = this.findNthOccurrence(text, '#', 2);
-      // Если второе вхождение найдено, берем текст до него
-      if (secondHeaderIndex !== -1) {
-        return text.slice(0, secondHeaderIndex).trim();
-      }
-      // Если второго # нет, возвращаем весь текст
-      return text.trim();
-    },
-    // Метод для поиска n-го вхождения символа
-    findNthOccurrence(text, char, n) {
-      let count = 0;
-      for (let i = 0; i < text.length; i++) {
-        if (text[i] === char) {
-          count++;
-          if (count === n) {
-            return i;
-          }
+                // Загружаем полное описание только при первом нажатии
+                if (this.showDetails && !this.description) {
+                    this.loadFullDescription();
+                }
+            },
+            // Загрузка текста от начала до второго # при монтировании компонента
+            async loadInitialText() {
+                try {
+                    const response = await fetch(`/${this.fileName}`);
+                    if (!response.ok) throw new Error('Ошибка загрузки файла');
+                    const text = await response.text();
+                    // Извлекаем текст от начала до второго #
+                    const initialText = this.extractInitialText(text);
+                    this.initialText = this.md.render(initialText); // Преобразуем в HTML
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    this.initialText = this.md.render('Не удалось загрузить описание.'); // Преобразуем в HTML
+                }
+            },
+            // Загрузка полного описания
+            async loadFullDescription() {
+                try {
+                    const response = await fetch(`/${this.fileName}`);
+                    if (!response.ok) throw new Error('Ошибка загрузки файла');
+                    this.description = await response.text();
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    this.description = 'Не удалось загрузить описание.';
+                }
+            },
+            // Метод для извлечения текста от начала до второго #
+            extractInitialText(text) {
+                // Ищем второе вхождение #
+                const secondHeaderIndex = this.findNthOccurrence(text, '#', 2);
+                // Если второе вхождение найдено, берем текст до него
+                if (secondHeaderIndex !== -1) {
+                    return text.slice(0, secondHeaderIndex).trim();
+                }
+                // Если второго # нет, возвращаем весь текст
+                return text.trim();
+            },
+            // Метод для поиска n-го вхождения символа
+            findNthOccurrence(text, char, n) {
+                let count = 0;
+                for (let i = 0; i < text.length; i++) {
+                    if (text[i] === char) {
+                        count++;
+                        if (count === n) {
+                            return i;
+                        }
+                    }
+                }
+                return -1; // Если n-ное вхождение не найдено
+            }
+        },
+        // Загружаем текст от начала до второго # при монтировании компонента
+        mounted() {
+            this.loadInitialText();
         }
-      }
-      return -1; // Если n-ное вхождение не найдено
-    }
-  },
-  // Загружаем текст от начала до второго # при монтировании компонента
-  mounted() {
-    this.loadInitialText();
-  }
-};
+    };
 </script>
 
 <style scoped>
