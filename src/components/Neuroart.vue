@@ -32,6 +32,40 @@ import MoreButton from './MoreButton.vue';
         <div class="image-container">
             <ImageModal imageSrc="./images/Image1.jpg" imageWidth="150px" />
         </div>
+
+        <div class="image-container">
+            <ImageModal imageSrc="./images/10.jpeg" imageWidth="150px" />
+            in the style of ck-mgs, nistyle, Special Ink-drawing mode, intricate linework with expressive contrasts, Mh1$AgThS2, Inkplash art on rice paper, sepia, henna , Silhouette Art, magnificent, inksplash closeup portrait of stunning japanese female sc-fi soldier, helmet, mirrored visor reflecting jungle environment
+
+        </div>
+        <div class="image-container">
+            <ImageModal imageSrc="./images/11.png" imageWidth="150px" />
+            bmstyle anime "A human head made of translucent, crystallized material shatters outward, with shards transforming into a burst of vibrant flowers. The flowers are varied in color and species, blooming mid-air as if born from the explosion. Soft light refracts through the crystal fragments, creating a surreal, dreamlike atmosphere."
+
+        </div>
+        <div class="image-container">
+            <ImageModal imageSrc="./images/12.jpeg" imageWidth="150px" />
+            Masterpiece, absurdres, best quality, 1boy, solo, Scrat, long snout, bushy tail, bulging eyes, striped tail, space marine, power armor, firing gun, heavy bolter, battlefield background, closeup, UltraM40k, no helmet, acorn insignia,
+
+        </div>
+        <div class="image-container">
+            <ImageModal imageSrc="./images/15.jpeg" imageWidth="150px" />
+            Masterpiece, absurdres, best quality, 1boy, solo, ch1ken, chicken, long beak, cartoon, space marine, power armor, firing gun, heavy bolter, battlefield background, closeup, UltraM40k, no helmet,
+
+        </div>
+        <div class="image-container">
+            <ImageModal imageSrc="./images/16.jpeg" imageWidth="150px" />
+
+        </div>
+        <div class="image-container">
+            <ImageModal imageSrc="./images/17.jpeg" imageWidth="150px" />
+
+        </div>
+        <div class="image-container">
+            <ImageModal imageSrc="./images/18.png" imageWidth="150px" />
+            
+        </div>
+
     </div>
 
     <!-- Компонент WelcomeItem для отображения раздела "Documentation" -->
