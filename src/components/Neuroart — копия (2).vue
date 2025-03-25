@@ -66,17 +66,6 @@ import MoreButton from './MoreButton.vue';
             
         </div>
 
-<div class="image-container">
-  <div class="content-wrapper">
-    <ImageModal imageSrc="./images/12.jpeg" imageWidth="150px" />
-    <div class="text-content">
-      Masterpiece, absurdres, best quality, 1boy, solo, Scrat, long snout, bushy tail, 
-      bulging eyes, striped tail, space marine, power armor, firing gun, heavy bolter, 
-      battlefield background, closeup, UltraM40k, no helmet, acorn insignia
-    </div>
-  </div>
-</div>
-
     </div>
 
     <!-- Компонент WelcomeItem для отображения раздела "Documentation" -->
@@ -117,22 +106,8 @@ import MoreButton from './MoreButton.vue';
         flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку, если не хватает места */
     }
 
-
-.image-container {
-
-  margin: 20px 0;
-}
-
-.content-wrapper {
-  display: flex;
-  align-items: flex-start; /* Выравнивание по верхнему краю */
-  gap: 20px; /* Расстояние между изображением и текстом */
-}
-
-.text-content {
-  flex: 1; /* Текст занимает все оставшееся пространство */
-  text-align: left;
-  word-wrap: break-word; /* Перенос длинных слов */
-}
+    .image-container {
+        margin: 10px; /* Отступы между изображениями */
+    }
 
 </style>
