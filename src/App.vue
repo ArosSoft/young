@@ -9,11 +9,12 @@
 
             <!-- Навигационное меню -->
             <nav>
-                <router-link to="/">Домой</router-link> |
-                <router-link to="/about">О нас</router-link> |
-                <router-link to="/welcome">Идеи молодежи</router-link> |
-                <router-link to="/neuroart">Нейро-Арт</router-link> |
-                <router-link to="/graffiti">Граффити</router-link>
+                <router-link to="/">Домой</router-link> 
+                <router-link to="/about">О нас</router-link> 
+                <router-link to="/welcome">Идеи молодежи</router-link> 
+                <router-link to="/neuroart">Нейро-Арт</router-link> 
+                <router-link to="/graffiti">Граффити</router-link> 
+                <router-link to="/volonter">Волонтёрство</router-link>
             </nav>
         </div>
     </header>
@@ -51,7 +52,7 @@
         nav a {
             display: inline-block;
             padding: 0 1rem;
-            border-left: 1px solid var(--color-border);
+            border-left: 3px solid black;
         }
 
             /* Убираем границу у первой ссылки */
