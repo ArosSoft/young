@@ -23,80 +23,77 @@ import MoreButton from './MoreButton.vue';
     </div>
 
     <div class="container">
-        <div class="image-container">
+        <!-- Одиночные изображения -->
+        <div class="single-image">
             <ImageModal imageSrc="./images/Image.jpg" imageWidth="150px" />
         </div>
-        <div class="image-container">
+        <div class="single-image">
             <ImageModal imageSrc="./images/Imagevag.jpg" imageWidth="150px" />
         </div>
-        <div class="image-container">
+        <div class="single-image">
             <ImageModal imageSrc="./images/Image1.jpg" imageWidth="150px" />
         </div>
-
-        <div class="image-container">
-            <ImageModal imageSrc="./images/10.jpeg" imageWidth="150px" />
-            in the style of ck-mgs, nistyle, Special Ink-drawing mode, intricate linework with expressive contrasts, Mh1$AgThS2, Inkplash art on rice paper, sepia, henna , Silhouette Art, magnificent, inksplash closeup portrait of stunning japanese female sc-fi soldier, helmet, mirrored visor reflecting jungle environment
-
-        </div>
-        <div class="image-container">
-            <ImageModal imageSrc="./images/11.png" imageWidth="150px" />
-            bmstyle anime "A human head made of translucent, crystallized material shatters outward, with shards transforming into a burst of vibrant flowers. The flowers are varied in color and species, blooming mid-air as if born from the explosion. Soft light refracts through the crystal fragments, creating a surreal, dreamlike atmosphere."
-
-        </div>
-        <div class="image-container">
-            <ImageModal imageSrc="./images/12.jpeg" imageWidth="150px" />
-            Masterpiece, absurdres, best quality, 1boy, solo, Scrat, long snout, bushy tail, bulging eyes, striped tail, space marine, power armor, firing gun, heavy bolter, battlefield background, closeup, UltraM40k, no helmet, acorn insignia,
-
-        </div>
-        <div class="image-container">
-            <ImageModal imageSrc="./images/15.jpeg" imageWidth="150px" />
-            Masterpiece, absurdres, best quality, 1boy, solo, ch1ken, chicken, long beak, cartoon, space marine, power armor, firing gun, heavy bolter, battlefield background, closeup, UltraM40k, no helmet,
-
-        </div>
-        <div class="image-container">
+        <div class="single-image">
             <ImageModal imageSrc="./images/16.jpeg" imageWidth="150px" />
-
         </div>
-        <div class="image-container">
+        <div class="single-image">
             <ImageModal imageSrc="./images/17.jpeg" imageWidth="150px" />
-
         </div>
-        <div class="image-container">
+        <div class="single-image">
             <ImageModal imageSrc="./images/18.png" imageWidth="150px" />
-            
+        </div>
+        <div class="single-image">
+            <ImageModal imageSrc="./images/1.jpg" imageWidth="150px" />
         </div>
 
-<div class="image-container">
-  <div class="content-wrapper">
-    <ImageModal imageSrc="./images/12.jpeg" imageWidth="150px" />
-    <div class="text-content">
-      Masterpiece, absurdres, best quality, 1boy, solo, Scrat, long snout, bushy tail, 
-      bulging eyes, striped tail, space marine, power armor, firing gun, heavy bolter, 
-      battlefield background, closeup, UltraM40k, no helmet, acorn insignia
+        <!-- Изображения с текстом (промпты) -->
+        <div class="prompt-item">
+            <ImageModal imageSrc="./images/10.jpeg" imageWidth="150px" />
+            <div class="prompt-text">
+                in the style of ck-mgs, nistyle, Special Ink-drawing mode, intricate linework with expressive contrasts, Mh1$AgThS2, Inkplash art on rice paper, sepia, henna , Silhouette Art, magnificent, inksplash closeup portrait of stunning japanese female sc-fi soldier, helmet, mirrored visor reflecting jungle environment
+            </div>
+        </div>
+        
+        <div class="prompt-item">
+            <ImageModal imageSrc="./images/11.png" imageWidth="150px" />
+            <div class="prompt-text">
+                bmstyle anime "A human head made of translucent, crystallized material shatters outward, with shards transforming into a burst of vibrant flowers. The flowers are varied in color and species, blooming mid-air as if born from the explosion. Soft light refracts through the crystal fragments, creating a surreal, dreamlike atmosphere."
+            </div>
+        </div>
+        
+        <div class="prompt-item">
+            <ImageModal imageSrc="./images/12.jpeg" imageWidth="150px" />
+            <div class="prompt-text">
+                Masterpiece, absurdres, best quality, 1boy, solo, Scrat, long snout, bushy tail, bulging eyes, striped tail, space marine, power armor, firing gun, heavy bolter, battlefield background, closeup, UltraM40k, no helmet, acorn insignia
+            </div>
+        </div>
+        
+        <div class="prompt-item">
+            <ImageModal imageSrc="./images/15.jpeg" imageWidth="150px" />
+            <div class="prompt-text">
+                Masterpiece, absurdres, best quality, 1boy, solo, ch1ken, chicken, long beak, cartoon, space marine, power armor, firing gun, heavy bolter, battlefield background, closeup, UltraM40k, no helmet
+            </div>
+        </div>
+        
+        <div class="prompt-item">
+            <ImageModal imageSrc="./images/2.jpg" imageWidth="150px" />
+            <div class="prompt-text">
+                A dove stands on two legs in an aristocratic coat and spy glasses on the tenth street of a dark city in the middle of a dark night
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-    </div>
-
-    <!-- Компонент WelcomeItem для отображения раздела "Documentation" -->
     <WelcomeItem>
-        <!-- Иконка для раздела "Documentation" -->
         <template #icon>
             <DocumentationIcon />
         </template>
-        <!-- Заголовок раздела -->
         <template #heading>
             Documentation
         </template>
-
-        <!-- Текст с ссылкой на официальную документацию Vue.js -->
-        Vue’s
+        Vue's
         <a target="_blank" href="https://vuejs.org/">official documentation</a>
         provides you with all information you need to get started.
     </WelcomeItem>
-
-
 </template>
 
 <style>
@@ -109,30 +106,55 @@ import MoreButton from './MoreButton.vue';
         margin-top: 60px;
     }
 
-  
     .container {
         display: flex;
-        justify-content: space-around; /* Равномерное распределение пространства между элементами */
-        align-items: center; /* Выравнивание элементов по центру по вертикали */
-        flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку, если не хватает места */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
+    .single-image {
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        width: 150px;
+    }
 
-.image-container {
+    .prompt-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        width: 100%;
+        max-width: 800px;
+        margin: 15px 0;
+        padding: 15px;
+        background: #f8f8f8;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-  margin: 20px 0;
-}
+    .prompt-text {
+        flex: 1;
+        text-align: left;
+        word-wrap: break-word;
+        padding: 10px;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+    }
 
-.content-wrapper {
-  display: flex;
-  align-items: flex-start; /* Выравнивание по верхнему краю */
-  gap: 20px; /* Расстояние между изображением и текстом */
-}
-
-.text-content {
-  flex: 1; /* Текст занимает все оставшееся пространство */
-  text-align: left;
-  word-wrap: break-word; /* Перенос длинных слов */
-}
-
+    @media (max-width: 768px) {
+        .prompt-item {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .prompt-text {
+            max-width: 100%;
+            padding: 10px 0;
+        }
+    }
 </style>
