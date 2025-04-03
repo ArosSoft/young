@@ -17,9 +17,9 @@ import MoreButton from './MoreButton.vue';
 
     <div id="morebutton">
         <!-- Используем компонент с указанием файла -->
-        <MoreButton fileName="./young/text/t1.txt" imageSrc="./images/Image.jpg" />
+        <MoreButton fileName="./text/t1.txt" imageSrc="./images/Image.jpg" />
         <!-- Можно использовать другой файл -->
-        <MoreButton fileName="./young/text/t2.txt" imageSrc="./images/Image1.jpg" />
+        <MoreButton fileName="./text/t2.txt" imageSrc="./images/Image1.jpg" />
     </div>
 
     <div class="container">

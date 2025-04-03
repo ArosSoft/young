@@ -8,7 +8,7 @@ import WelcomeItem from './WelcomeItem.vue' // Компонент для ото�
 <template>
    <div id="morebutton">
         <!-- Используем компонент с указанием файла -->
-        <MoreButton fileName="./young/text/g1.txt" imageSrc="./images/Graffity/Image.jpg" />
+        <MoreButton fileName="./text/g1.txt" imageSrc="./images/Graffity/Image.jpg" />
         
     </div>
 
