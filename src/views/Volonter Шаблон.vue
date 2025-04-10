@@ -71,17 +71,25 @@ export default {
             'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: "mistral-tiny", // или "mistral-small", "mistral-medium"
+            model: "mistral-tiny",
             messages: [
+              {
+                role: "system",
+                content: "Ты помощник для волонтеров. Отвечай структурированно, используя шаблон ответа."
+              },
               { role: "user", content: this.userRequest }
             ],
-            temperature: 0.7
+            temperature: 0.7,
+            response_format: {  // Требует Mistral Medium/Large
+              type: "json_object"  // Для JSON-ответов
+            }
           })
         });
         
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
-        this.response = await response.json();
+        const data = await response.json();
+        this.response = this.formatMistralResponse(data);
         
       } catch (err) {
         this.error = `Ошибка: ${err.message}`;
@@ -89,6 +97,46 @@ export default {
       } finally {
         this.isLoading = false;
       }
+    },
+    
+    formatMistralResponse(data) {
+      // Базовый шаблон для ответа
+      const template = {
+        answer: data.choices[0]?.message?.content || "Нет ответа",
+        suggestions: [],
+        sources: [],
+        warning: null
+      };
+      
+      // Попробуем распарсить JSON, если ответ в формате
+      try {
+        const parsed = JSON.parse(template.answer);
+        return {
+          ...template,
+          ...parsed
+        };
+      } catch {
+        // Если не JSON, используем как есть
+        return template;
+      }
+    }
+  },
+  
+  computed: {
+    formattedResponse() {
+      if (!this.response) return '';
+      
+      // Кастомное форматирование для шаблона
+      return `
+Ответ:
+${this.response.answer || 'Нет данных'}
+
+${this.response.suggestions?.length ? 'Рекомендации:\n- ' + this.response.suggestions.join('\n- ') : ''}
+
+${this.response.sources?.length ? 'Источники:\n- ' + this.response.sources.join('\n- ') : ''}
+
+${this.response.warning ? '⚠️ ' + this.response.warning : ''}
+      `.trim();
     }
   }
 }
