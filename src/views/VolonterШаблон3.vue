@@ -7,9 +7,6 @@
             <p v-if="organizations.length > 0" class="file-info">
                 Загружено организаций: {{ organizations.length }}
             </p>
-            <p v-else class="file-info">
-                Используется стандартный список организаций
-            </p>
         </div>
 
         <div class="ai-interface">
@@ -18,8 +15,9 @@
                           placeholder="Введите ваш запрос для Mistral..."
                           class="request-input"></textarea>
                 <button @click="sendRequestToMistral"
-                        :disabled="isLoading"
-                        class="send-button">
+                        :disabled="isLoading || organizations.length === 0"
+                        class="send-button"
+                        title="Сначала загрузите файл с организациями">
                     {{ isLoading ? 'Отправка...' : 'Отправить запрос' }}
                 </button>
             </div>
@@ -39,16 +37,6 @@
 </template>
 
 <script>
-    const DEFAULT_ORGANIZATIONS = [
-        "1. Добровольческий отряд Липецкого металлургического колледжа «От сердца к сердцу» телефон +7-474-274-28-86",
-        "2. Туристический отряд добровольцев",
-        "3. Добровольческий отряд «Сокол» (школа № 63)",
-        "4. Клуб Добровольцев РАНХиГС",
-        "5. Патриотический сектор профкома ЛГТУ",
-        "6. Липецкая Команда Помощи бездомным животным «Велес». (Контакты: Телефон +79119111111; Социальные сети: https://vk.com/club13050764)",
-        "7. Поисково-спасательный отряд «Лиза Алерт»"
-    ].join('\n');
-
     export default {
         name: 'Volonter',
         data() {
@@ -57,34 +45,10 @@
                 response: null,
                 isLoading: false,
                 error: null,
-                organizations: [],
-                loadingOrganizations: true
+                organizations: []
             }
         },
-        async created() {
-            await this.loadDefaultOrganizations();
-        },
         methods: {
-            async loadDefaultOrganizations() {
-                try {
-                    // Пытаемся загрузить файл из корневой папки
-                    const response = await fetch('/official.txt');
-                    if (response.ok) {
-                        const content = await response.text();
-                        this.parseOrganizations(content);
-                    } else {
-                        // Если файл не найден, используем встроенные данные
-                        this.parseOrganizations(DEFAULT_ORGANIZATIONS);
-                    }
-                } catch (err) {
-                    console.error('Ошибка загрузки организаций:', err);
-                    // В случае ошибки используем встроенные данные
-                    this.parseOrganizations(DEFAULT_ORGANIZATIONS);
-                } finally {
-                    this.loadingOrganizations = false;
-                }
-            },
-
             handleFileUpload(event) {
                 const file = event.target.files[0];
                 if (!file) return;
@@ -96,8 +60,6 @@
                         this.parseOrganizations(content);
                     } catch (err) {
                         this.error = 'Ошибка чтения файла: ' + err.message;
-                        // В случае ошибки возвращаемся к стандартным данным
-                        this.parseOrganizations(DEFAULT_ORGANIZATIONS);
                     }
                 };
                 reader.readAsText(file);
@@ -106,43 +68,30 @@
             parseOrganizations(content) {
                 const lines = content.split('\n').filter(line => line.trim() !== '');
                 this.organizations = lines.map(line => {
-                    // Удаляем нумерацию в начале строки
-                    const cleanLine = line.replace(/^\d+\.\s*/, '');
-
-                    // Извлекаем контакты
-                    const phoneMatch = cleanLine.match(/(телефон\s*\+?[0-9\-()\s]+)/i);
-                    const socialMatch = cleanLine.match(/(https?:\/\/[^\s]+)/i);
-
+                    // Извлекаем название и контакты
+                    const phoneMatch = line.match(/(телефон\s*\+?[0-9\-()\s]+)/i);
                     const phone = phoneMatch ? phoneMatch[0] : null;
-                    const social = socialMatch ? socialMatch[0] : null;
-
-                    // Извлекаем название (удаляем контакты из строки)
-                    let name = cleanLine;
-                    if (phone) name = name.replace(phone, '');
-                    if (social) name = name.replace(social, '');
-                    name = name.replace(/\([^)]*\)/g, '').replace(/\.$/, '').trim();
-
-                    // Формируем массив контактов
-                    const contacts = [];
-                    if (phone) contacts.push(phone);
-                    if (social) contacts.push(`Соцсети: ${social}`);
+                    const name = phone ? line.replace(phone, '').trim() : line.trim();
 
                     return {
                         name,
-                        contacts
+                        contacts: phone ? [phone] : []
                     };
                 });
 
                 if (this.organizations.length === 0) {
                     this.error = 'Не найдено организаций в файле';
-                    // Если файл пустой, используем стандартные данные
-                    this.parseOrganizations(DEFAULT_ORGANIZATIONS);
                 }
             },
 
             async sendRequestToMistral() {
                 if (!this.userRequest.trim()) {
                     this.error = 'Пожалуйста, введите запрос';
+                    return;
+                }
+
+                if (this.organizations.length === 0) {
+                    this.error = 'Пожалуйста, загрузите файл с организациями';
                     return;
                 }
 
@@ -154,6 +103,7 @@
                     const apiKey = import.meta.env.VITE_MISTRAL_API_KEY;
                     if (!apiKey) throw new Error('API-ключ не найден');
 
+                    // Форматируем запрос пользователя с информацией об организациях
                     const formattedUserRequest = this.formatUserRequest(this.userRequest);
 
                     const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
