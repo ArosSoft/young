@@ -2,9 +2,9 @@
     <header>
         <!-- Кнопка входа в левом верхнем углу -->
         <div class="auth-button">
-            <button v-if="!user" @click="signIn">Войти</button>
+            <button v-if="!user" @click="showAuthModal = true">Войти</button>
             <div v-else class="user-info">
-                <span>{{ user.displayName }}</span>
+                <span>{{ user.displayName || user.email }}</span>
                 <button @click="signOutUser">Выйти</button>
             </div>
         </div>
@@ -28,40 +28,73 @@
         </div>
     </header>
 
+    <!-- Модальное окно авторизации -->
+    <div v-if="showAuthModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="close" @click="showAuthModal = false">&times;</span>
+            <h2>Вход</h2>
+            <div class="auth-methods">
+                <button @click="signInWithGoogle">Войти через Google</button>
+                <div class="divider">или</div>
+                <form @submit.prevent="signInWithEmail">
+                    <input type="email" v-model="email" placeholder="Email" required>
+                    <input type="password" v-model="password" placeholder="Пароль" required>
+                    <button type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <!-- Основное содержимое страницы, которое будет меняться в зависимости от маршрута -->
+    <!-- Основное содержимое страницы -->
     <main>
         <router-view />
     </main>
 
     <!-- Футер сайта -->
     <TheFooter />
-
 </template>
 
 <script setup>
-    // Импорт компонентов
-
-    import HelloWorld from './components/HelloWorld.vue'
-    import TheFooter from './components/TheFooter.vue'
-
+import HelloWorld from './components/HelloWorld.vue'
+import TheFooter from './components/TheFooter.vue'
 import { ref, onMounted } from 'vue';
-import { auth, GoogleAuthProvider, signInWithPopup, signOut } from './firebase';
+import { 
+    auth, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    signOut,
+    signInWithEmailAndPassword
+} from './firebase';
 
 const user = ref(null);
+const showAuthModal = ref(false);
+const email = ref('');
+const password = ref('');
 
 onMounted(() => {
     auth.onAuthStateChanged((authUser) => {
         user.value = authUser;
+        if (authUser) {
+            showAuthModal.value = false;
+        }
     });
 });
 
-const signIn = async () => {
+const signInWithGoogle = async () => {
     try {
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
     } catch (error) {
+        console.error("Ошибка входа через Google:", error);
+    }
+};
+
+const signInWithEmail = async () => {
+    try {
+        await signInWithEmailAndPassword(auth, email.value, password.value);
+    } catch (error) {
         console.error("Ошибка входа:", error);
+        alert("Неверный email или пароль");
     }
 };
 
@@ -72,7 +105,6 @@ const signOutUser = async () => {
         console.error("Ошибка выхода:", error);
     }
 };
-
 </script>
 
 <style scoped>
@@ -180,4 +212,86 @@ const signOutUser = async () => {
         --color-border: #ddd;
         --color-text: #333;
     }
+    .auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.auth-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.auth-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-methods button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.auth-methods button:first-child {
+    background-color: #4285F4;
+    color: white;
+}
+
+.auth-methods form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-methods input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.divider {
+    text-align: center;
+    margin: 10px 0;
+    position: relative;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    position: absolute;
+    top: 50%;
+    width: 45%;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
 </style>
