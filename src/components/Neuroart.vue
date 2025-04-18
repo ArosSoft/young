@@ -14,7 +14,7 @@ import MoreButton from './MoreButton.vue';
 </script>
 
 <template>
-
+Странно...
     <div id="morebutton">
         <!-- Используем компонент с указанием файла -->
         <MoreButton fileName="./text/t1.txt" imageSrc="./images/Image.jpg" />

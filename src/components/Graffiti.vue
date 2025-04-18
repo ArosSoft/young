@@ -12,12 +12,11 @@ import WelcomeItem from './WelcomeItem.vue' // Компонент для ото�
         
     </div>
 
-
     <div class="image-container">
   <div class="content-wrapper">
     <ImageModal imageSrc="./images/Graffity/Image.jpg" imageWidth="300px" />
     <div class="text-content">
-      Вася Пупкин
+      Куку
     </div>
   </div>
 </div>

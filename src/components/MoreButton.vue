@@ -120,7 +120,7 @@
 <style scoped>
     .more-button {
         text-align: center;
-        margin-top: 50px;
+        margin-top: 10px;
     }
 
     .content {
@@ -131,9 +131,9 @@
     }
 
     .image {
-        max-width: 100px; /* Размер изображения */
+        max-width: 150px; /* Размер изображения */
         height: auto;
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
     .text {
@@ -141,8 +141,8 @@
     }
 
     button {
-        padding: 10px 20px;
-        font-size: 16px;
+        padding: 10px 10px;
+        font-size: 14px;
         cursor: pointer;
         margin-top: 10px; /* Отступ между текстом и кнопкой */
     }
