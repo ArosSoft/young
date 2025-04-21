@@ -67,19 +67,22 @@
         methods: {
             async loadDefaultOrganizations() {
                 try {
-                    // Пытаемся загрузить файл из корневой папки
-                    const response = await fetch('/official.txt');
+                    const response = await fetch('./text/official.txt', {
+                        headers: {
+                            'Accept': 'text/plain' // Явно запрашиваем текстовый файл
+                        }
+                    });
+
                     if (response.ok) {
                         const content = await response.text();
                         this.parseOrganizations(content);
-                    } else {
-                        // Если файл не найден, используем встроенные данные
-                        this.parseOrganizations(DEFAULT_ORGANIZATIONS);
+                        return;
                     }
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 } catch (err) {
                     console.error('Ошибка загрузки организаций:', err);
                     // В случае ошибки используем встроенные данные
-                    this.parseOrganizations(DEFAULT_ORGANIZATIONS);
+                    // this.parseOrganizations(DEFAULT_ORGANIZATIONS);
                 } finally {
                     this.loadingOrganizations = false;
                 }
@@ -163,7 +166,7 @@
                             'Authorization': `Bearer ${apiKey}`
                         },
                         body: JSON.stringify({
-                            model: "mistral-tiny",
+                            model: "mistral-medium",
                             messages: [
                                 {
                                     role: "system",

@@ -163,42 +163,49 @@ const signOutUser = async () => {
     @media (min-width: 1024px) {
         body {
             min-height: 100vh;
-            margin: 0; /* Убираем отступы body */
         }
 
         #app {
             min-height: 100vh;
             display: flex;
-            flex-direction: row; /* Горизонтальное расположение */
-            padding: 0;
+            flex-direction: row; /* Изменено на row для горизонтального расположения */
+            padding: 0 1rem;
         }
 
         header {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto; /* Прокрутка, если контент не помещается */
-            padding: 1rem;
-            background: var(--color-background-soft);
-            border-right: 1px solid var(--color-border);
-        }
-
-        main {
-            flex: 1; /* Занимает оставшиеся 70% */
-            padding: 2rem;
-            overflow-y: auto; /* Прокрутка для основного контента */
+            position: sticky; /* Фиксируем левую часть */
+            top: 0; /* Прилипает к верхней части экрана */
+            height: 100vh; /* Занимает всю высоту экрана */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Центрируем содержимое по вертикали */
+            align-items: center; /* Центрируем содержимое по горизонтали */
+            padding-right: calc(var(--section-gap) / 2);
+            width: 80%; /* Левая часть занимает половину экрана */
         }
 
         .logo {
-            margin: 1rem auto;
+            margin: 1rem auto 1rem; /* Логотип остается по центру */
         }
 
+        header .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем содержимое по горизонтали */
+        }
 
         nav {
-            text-align: center;
-            margin-top: 2rem;
+            text-align: center; /* Навигационное меню по центру */
+            margin-left: 0; /* Убрано смещение влево */
+            font-size: 1rem;
+        }
+
+        main {
+            flex: 1; /* Основное содержимое занимает оставшуюся часть экрана */
+            padding-left: 0rem; /* Отступ от левой части */
         }
     }
+
     /* Определение кастомных CSS переменных */
     :root {
         --color-background-soft: #f0f0f0;
