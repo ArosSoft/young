@@ -10,7 +10,9 @@
         </div>
         
         <!-- Логотип сайта -->
-        <img alt="logo" class="logo" src="./assets/logo.jfif" width="320" height="250" />
+        <img src="./assets/logo.jpg"
+             style="width: 250px; height: auto; display: block; margin: 0 auto;"
+             alt="logo">
         
         <div class="wrapper">
             <!-- Компонент HelloWorld с заголовком "ИДЕИ МОЛОДЕЖИ" -->
@@ -178,9 +180,7 @@ const signOutUser = async () => {
             top: 0;
             height: 100vh;
             overflow-y: auto; /* Прокрутка, если контент не помещается */
-            padding: 1rem;
-            background: var(--color-background-soft);
-            border-right: 1px solid var(--color-border);
+            padding: 1rem;           
         }
 
         main {

@@ -4,8 +4,9 @@
     "\\public",
     "\\public\\text",
     "\\src",
+    "\\src\\assets",
     "\\src\\router"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\App.vue",
   "PreviewInSolutionExplorer": false
 }
