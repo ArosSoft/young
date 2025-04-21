@@ -8,7 +8,7 @@ import MoreButton from '/src/components/MoreButton.vue';
 <template>
     <div id="morebutton">
         <!-- Используем компонент с указанием файла -->
-        <MoreButton fileName="./young/public/text/n1.txt" imageSrc="./images/3.jpg" />
+        <MoreButton fileName="./young/text/n1.txt" imageSrc="./images/3.jpg" />
     </div>
 <div>
 <h1>Инструменты нейроарта</h1>

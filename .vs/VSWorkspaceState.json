@@ -5,8 +5,9 @@
     "\\public\\text",
     "\\src",
     "\\src\\assets",
-    "\\src\\router"
+    "\\src\\router",
+    "\\src\\views"
   ],
-  "SelectedNode": "\\src\\App.vue",
+  "SelectedNode": "\\src\\views\\Neuroart.vue",
   "PreviewInSolutionExplorer": false
 }

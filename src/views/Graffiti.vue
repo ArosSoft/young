@@ -8,7 +8,7 @@ import MoreButton from '/src/components/MoreButton.vue';
 <template>
     <div id="morebutton">
         <!-- Используем компонент с указанием файла -->
-        <MoreButton fileName="./young/public/text/g1.txt" imageSrc="./images/cat.jpeg" />
+        <MoreButton fileName="./young/text/g1.txt" imageSrc="./images/cat.jpeg" />
     </div>
 <div>
 <h1>Сайты по граффити</h1>

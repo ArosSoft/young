@@ -236,9 +236,7 @@
         margin: 0 auto;
         padding: 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-image: url('@/assets/tile.png');
-        background-repeat: repeat;
-        background-attachment: fixed;
+ 
     }
 
     h1, h2, h3 {
