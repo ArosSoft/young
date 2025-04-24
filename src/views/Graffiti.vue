@@ -25,19 +25,40 @@ import MoreButton from '/src/components/MoreButton.vue';
 <div class="container">
     <!-- Одиночные изображения -->
     <div class="single-image">
-        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/94f45c4a-cc69-4041-86af-90a7bf287110/original=true,quality=90/image%20(14).jpeg" imageWidth="150px" />
+        <ImageModal imageSrc="./images/G101.jpg" imageWidth="150px" />
     </div>
 </div>
     <h1> Художники г. Липецка </h1>
     <!-- Изображения с текстом (промпты) -->
     <div class="prompt-item">
-        <ImageModal imageSrc="./images/10.jpeg" imageWidth="150px" />
+        <ImageModal imageSrc="./images/G1.jpg" imageWidth="150px" />
         <div class="prompt-text">
-            in the style of ck-mgs, nistyle, Special Ink-drawing mode, intricate linework with expressive contrasts, Mh1$AgThS2, Inkplash art on rice paper, sepia, henna , Silhouette Art, magnificent, inksplash closeup portrait of stunning japanese female sc-fi soldier, helmet, mirrored visor reflecting jungle environment
-        </div>
+            Дмитрий Савоста - уличный художник, создавший в Липецке много действительно достойных граффити. Если вы идете по улице и видите красивый рисунок на стене кафе или дома, вероятнее всего - это его работа.Дмитрий убежден, что стрит-арт — это тоже искусство, если к нему подходить разумно и творчески.
 
-
+        </div> 
 </div>
+
+<div class="prompt-item">
+        <ImageModal imageSrc="./images/G2.jpg" imageWidth="150px" />
+        <div class="prompt-text">
+            Владимир Кулик говорил: «В течение года чувствовал себя «звездой», обо мне писали мировые СМИ, пригласили в Индию, у меня появилась аудитория, коллаборация с брендами. Параллельно рисовал холсты, занимался одеждой».С подобным уровнем сложности (задействовано более 1000 элементов изображения) граффити с дополненной реальностью (AR) в России еще не было.
+
+        </div> 
+</div>
+<div class="prompt-item">
+        <ImageModal imageSrc="./images/G3.jpg" imageWidth="150px" />
+        <div class="prompt-text">
+            Данил Белый. При поддержке благотворительного фонда «Милосердие» на одной из центральных улиц Липецка открыли новое граффити с 13-метровым изображением бегущего легкоатлета. По замыслу авторов, оно пропагандирует здоровый образ жизни и призывает активно заниматься бегом.
+        </div> 
+</div>
+
+<div class="prompt-item">
+        <ImageModal imageSrc="./images/G4.jpg" imageWidth="150px" />
+        <div class="prompt-text">
+            Елизавета Рыжкова. Граффити на фасаде дома №30 по улице Космонавтов появилось в рамках проекта грантовой программы «Стальное дерево». Его авторы - липецкие художники Данил Белый и Елизавета Рыжкова
+
+        </div> 
+    </div> 
 </template>
 
 <style>

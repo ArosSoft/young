@@ -60,6 +60,11 @@
                         <span class="difficulty">Сложность: ★☆☆☆☆</span>
                         <span class="time">Время: 5 минут</span>
                     </div>
+                    <div class="single-image">
+                        <ImageModal imageSrc="./images/make/1.jpg" alt="Шаг 1" imageWidth="300px" />
+                    </div>
+
+
 
                     <div class="materials-section">
                         <h3>📦 Материалы</h3>
@@ -81,16 +86,36 @@
                         <ol>
                             <li>
                                 Возьмите лист бумаги формата А4.
-                                <div class="single-image">
-                                    <ImageModal imageSrc="./images/1.jpg" alt="Шаг 1" imageWidth="100px" />
-                                </div>
                             </li>
+
                             <li>Сложите лист пополам вдоль длинной стороны, затем разверните.</li>
+                            <div class="single-image">
+                                <ImageModal imageSrc="./images/make/2.jpg" alt="Шаг 1" imageWidth="300px" />
+                            </div>
+
                             <li>Верхние углы загните к центральной линии.</li>
+                            <div class="single-image">
+                                <ImageModal imageSrc="./images/make/4.jpg" alt="Шаг 1" imageWidth="300px" />
+                            </div>
+
                             <li>Снова загните новые углы к центру.</li>
+                            <div class="single-image">
+                                <ImageModal imageSrc="./images/make/6.jpg" alt="Шаг 1" imageWidth="300px" />
+                            </div>
                             <li>Сложите самолетик пополам по центральной линии.</li>
+                             <div class="single-image">
+                                <ImageModal imageSrc="./images/make/8.jpg" alt="Шаг 1" imageWidth="300px" />
+                            </div>
+
                             <li>Загните крылья, оставив примерно 1 см снизу для корпуса.</li>
+                            <div class="single-image">
+                                <ImageModal imageSrc="./images/make/10.jpg" alt="Шаг 1" imageWidth="300px" />
+                            </div>
                             <li>Расправьте крылья под прямым углом к корпусу.</li>
+                            <div class="single-image">
+                                <ImageModal imageSrc="./images/make/12.jpg" alt="Шаг 1" imageWidth="300px" />
+                            </div>
+
                         </ol>
                     </div>
 
@@ -231,6 +256,14 @@
 </script>
 
 <style scoped>
+
+    .single-image {
+        margin: 10px;
+        display: flex;
+        justify-content: right;
+        width: 400px;
+    }
+
     .podelki-container {
         max-width: 1000px;
         margin: 0 auto;

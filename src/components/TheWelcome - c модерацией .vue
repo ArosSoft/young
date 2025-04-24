@@ -85,33 +85,29 @@
         </div>
 
         <div class="comments-list">
-    <template v-for="comment in comments" :key="comment.id">
-        <div v-if="comment.approved || isAdmin" 
-             class="comment" 
-             :class="{ 'pending': !comment.approved }">
-            <div class="comment-header">
-                <strong>{{ comment.author }}:</strong>
-                <div class="comment-actions">
-                    <button v-if="isAdmin && !comment.approved"
-                            @click="approveComment(comment.id)"
-                            class="approve-button">
-                        Одобрить
-                    </button>
-                    <button v-if="isAdmin || user?.uid === comment.authorId"
-                            @click="deleteComment(comment.id, comment.authorId)"
-                            class="delete-button">
-                        Удалить
-                    </button>
+            <div v-for="comment in comments" :key="comment.id" class="comment" :class="{ 'pending': !comment.approved }">
+                <div class="comment-header">
+                    <strong>{{ comment.author }}:</strong>
+                    <div class="comment-actions">
+                        <button v-if="isAdmin && !comment.approved"
+                                @click="approveComment(comment.id)"
+                                class="approve-button">
+                            Одобрить
+                        </button>
+                        <button v-if="isAdmin || user?.uid === comment.authorId"
+                                @click="deleteComment(comment.id, comment.authorId)"
+                                class="delete-button">
+                            Удалить
+                        </button>
+                    </div>
+                </div>
+                <p>{{ comment.text }}</p>
+                <small>{{ new Date(comment.timestamp).toLocaleString() }}</small>
+                <div v-if="!comment.approved" class="moderation-notice">
+                    [На модерации]
                 </div>
             </div>
-            <p>{{ comment.text }}</p>
-            <small>{{ new Date(comment.timestamp).toLocaleString() }}</small>
-            <div v-if="!comment.approved" class="moderation-notice">
-                [На модерации]
-            </div>
         </div>
-    </template>
-</div>
     </div>
 </template>
 

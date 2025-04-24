@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\VueTest\\young\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\Neuroart.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\Neuroart.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\HomePage.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\HomePage.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\Graffiti.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\Graffiti.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\Maker.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\Maker.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\Neuroart.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\Neuroart.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "HomePage.vue",
+              "DocumentMoniker": "D:\\VueTest\\young\\src\\views\\HomePage.vue",
+              "RelativeDocumentMoniker": "src\\views\\HomePage.vue",
+              "ToolTip": "D:\\VueTest\\young\\src\\views\\HomePage.vue",
+              "RelativeToolTip": "src\\views\\HomePage.vue",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
+              "WhenOpened": "2025-04-24T18:27:13.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Neuroart.vue",
               "DocumentMoniker": "D:\\VueTest\\young\\src\\views\\Neuroart.vue",
               "RelativeDocumentMoniker": "src\\views\\Neuroart.vue",
               "ToolTip": "D:\\VueTest\\young\\src\\views\\Neuroart.vue",
               "RelativeToolTip": "src\\views\\Neuroart.vue",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
-              "WhenOpened": "2025-04-21T20:25:10.628Z",
+              "WhenOpened": "2025-04-24T18:00:24.172Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Graffiti.vue",
-              "DocumentMoniker": "D:\\VueTest\\young\\src\\views\\Graffiti.vue",
-              "RelativeDocumentMoniker": "src\\views\\Graffiti.vue",
-              "ToolTip": "D:\\VueTest\\young\\src\\views\\Graffiti.vue",
-              "RelativeToolTip": "src\\views\\Graffiti.vue",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Title": "Maker.vue",
+              "DocumentMoniker": "D:\\VueTest\\young\\src\\views\\Maker.vue",
+              "RelativeDocumentMoniker": "src\\views\\Maker.vue",
+              "ToolTip": "D:\\VueTest\\young\\src\\views\\Maker.vue",
+              "RelativeToolTip": "src\\views\\Maker.vue",
+              "ViewState": "AgIAAPgAAAAAAAAAAAAAAAcBAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
-              "WhenOpened": "2025-04-21T20:24:23.595Z",
+              "WhenOpened": "2025-04-24T17:59:36.195Z",
               "EditorCaption": ""
             }
           ]

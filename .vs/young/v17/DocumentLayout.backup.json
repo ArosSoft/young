@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\VueTest\\young\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\assets\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\assets\\main.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\Neuroart.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\Neuroart.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\App.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\App.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\VueTest\\young\\src\\views\\Graffiti.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\views\\Graffiti.vue||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "main.css",
-              "DocumentMoniker": "D:\\VueTest\\young\\src\\assets\\main.css",
-              "RelativeDocumentMoniker": "src\\assets\\main.css",
-              "ToolTip": "D:\\VueTest\\young\\src\\assets\\main.css",
-              "RelativeToolTip": "src\\assets\\main.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-04-21T19:39:36.87Z",
+              "Title": "Neuroart.vue",
+              "DocumentMoniker": "D:\\VueTest\\young\\src\\views\\Neuroart.vue",
+              "RelativeDocumentMoniker": "src\\views\\Neuroart.vue",
+              "ToolTip": "D:\\VueTest\\young\\src\\views\\Neuroart.vue",
+              "RelativeToolTip": "src\\views\\Neuroart.vue",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
+              "WhenOpened": "2025-04-21T20:25:10.628Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "App.vue",
-              "DocumentMoniker": "D:\\VueTest\\young\\src\\App.vue",
-              "RelativeDocumentMoniker": "src\\App.vue",
-              "ToolTip": "D:\\VueTest\\young\\src\\App.vue",
-              "RelativeToolTip": "src\\App.vue",
-              "ViewState": "AgIAAKYAAAAAAAAAAAAhwLYAAAAaAAAAAAAAAA==",
+              "Title": "Graffiti.vue",
+              "DocumentMoniker": "D:\\VueTest\\young\\src\\views\\Graffiti.vue",
+              "RelativeDocumentMoniker": "src\\views\\Graffiti.vue",
+              "ToolTip": "D:\\VueTest\\young\\src\\views\\Graffiti.vue",
+              "RelativeToolTip": "src\\views\\Graffiti.vue",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003491|",
-              "WhenOpened": "2025-04-21T19:13:29.773Z",
+              "WhenOpened": "2025-04-21T20:24:23.595Z",
               "EditorCaption": ""
             }
           ]

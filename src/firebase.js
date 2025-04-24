@@ -6,7 +6,7 @@ import {
   signOut,
   signInWithEmailAndPassword
 } from "firebase/auth";
-import { getDatabase, ref, push, onValue, remove } from "firebase/database";
+import { getDatabase, ref, push, onValue, remove, update } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC58enCNd-UjaZ2QEyrGySa2SJ-18c3Sko",
@@ -31,5 +31,6 @@ export {
   ref, 
   push, 
   onValue, 
-  remove
+  remove,
+  update
 };
