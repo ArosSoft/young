@@ -8,7 +8,7 @@ import MoreButton from '/src/components/MoreButton.vue';
 <template>
     <div id="morebutton">
         <!-- Используем компонент с указанием файла -->
-        <MoreButton fileName="./young/text/g1.txt" imageSrc="./images/cat.jpeg" />
+        <MoreButton fileName="./young/text/g1.txt" imageSrc="./images/cat2.png" />
     </div>
 <div>
 <h1>Сайты по граффити</h1>
@@ -25,7 +25,25 @@ import MoreButton from '/src/components/MoreButton.vue';
 <div class="container">
     <!-- Одиночные изображения -->
     <div class="single-image">
-        <ImageModal imageSrc="./images/G101.jpg" imageWidth="150px" />
+        <ImageModal imageSrc="./images/c1.jpg" imageWidth="400px" />
+    </div>
+</div>
+<div class="container">
+    <!-- Одиночные изображения -->
+    <div class="single-image">
+        <ImageModal imageSrc="./images/c2.jpg" imageWidth="400px" />
+    </div>
+</div>
+<div class="container">
+    <!-- Одиночные изображения -->
+    <div class="single-image">
+        <ImageModal imageSrc="./images/c3.jpg" imageWidth="400px" />
+    </div>
+</div>
+<div class="container">
+    <!-- Одиночные изображения -->
+    <div class="single-image">
+        <ImageModal imageSrc="./images/c4.jpg" imageWidth="400px" />
     </div>
 </div>
     <h1> Художники г. Липецка </h1>
