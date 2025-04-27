@@ -67,71 +67,26 @@
         methods: {
             async loadDefaultOrganizations() {
                 try {
-                    // Пробуем загрузить JSON
-                    const jsonResponse = await fetch('./text/official.json', {
+                    const response = await fetch('./text/official.txt', {
                         headers: {
-                            'Accept': 'application/json'
+                            'Accept': 'text/plain' // Явно запрашиваем текстовый файл
                         }
                     });
 
-                    if (jsonResponse.ok) {
-                        const jsonData = await jsonResponse.json();
-                        this.parseJsonOrganizations(jsonData);
-                        return;
-                    }
-
-                    // Если JSON не загрузился, пробуем TXT
-                    const txtResponse = await fetch('./text/official.txt', {
-                        headers: {
-                            'Accept': 'text/plain'
-                        }
-                    });
-
-                    if (txtResponse.ok) {
-                        const content = await txtResponse.text();
+                    if (response.ok) {
+                        const content = await response.text();
                         this.parseOrganizations(content);
                         return;
                     }
-
-                    throw new Error('Не удалось загрузить ни JSON, ни TXT файлы');
-
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 } catch (err) {
                     console.error('Ошибка загрузки организаций:', err);
                     // В случае ошибки используем встроенные данные
-                    this.parseOrganizations(DEFAULT_ORGANIZATIONS);
+                    // this.parseOrganizations(DEFAULT_ORGANIZATIONS);
                 } finally {
                     this.loadingOrganizations = false;
                 }
             },
-
-            parseJsonOrganizations(jsonData) {
-                this.organizations = jsonData.map(item => {
-                    const contacts = [];
-                    if (item.contacts) {
-                        // Разбираем контакты из JSON
-                        if (typeof item.contacts === 'string') {
-                            // Если контакты в виде строки - пытаемся извлечь телефоны и ссылки
-                            const phoneMatch = item.contacts.match(/\+?[0-9\-()\s]{7,}/g);
-                            const socialMatch = item.contacts.match(/(https?:\/\/[^\s]+)/g);
-
-                            if (phoneMatch) contacts.push(...phoneMatch);
-                            if (socialMatch) contacts.push(...socialMatch.map(s => `Соцсети: ${s}`));
-                        }
-                    }
-
-                    return {
-                        name: item.name || 'Без названия',
-                        description: item.description || '',
-                        contacts: contacts.length > 0 ? contacts : []
-                    };
-                });
-
-                if (this.organizations.length === 0) {
-                    this.error = 'Не найдено организаций в JSON файле';
-                    this.parseOrganizations(DEFAULT_ORGANIZATIONS);
-                }
-            },
-
 
             handleFileUpload(event) {
                 const file = event.target.files[0];
@@ -141,23 +96,14 @@
                 reader.onload = (e) => {
                     try {
                         const content = e.target.result;
-                        if (file.name.endsWith('.json')) {
-                            const jsonData = JSON.parse(content);
-                            this.parseJsonOrganizations(jsonData);
-                        } else {
-                            this.parseOrganizations(content);
-                        }
+                        this.parseOrganizations(content);
                     } catch (err) {
                         this.error = 'Ошибка чтения файла: ' + err.message;
+                        // В случае ошибки возвращаемся к стандартным данным
                         this.parseOrganizations(DEFAULT_ORGANIZATIONS);
                     }
                 };
-
-                if (file.name.endsWith('.json')) {
-                    reader.readAsText(file);
-                } else {
-                    reader.readAsText(file);
-                }
+                reader.readAsText(file);
             },
 
             parseOrganizations(content) {
