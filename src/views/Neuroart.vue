@@ -14,17 +14,19 @@ import MoreButton from '/src/components/MoreButton.vue';
 <h1>Инструменты нейроарта</h1>
 
 <ol>
-  <li>Сайт <a href="https://www.mage.space/" target="_blank" rel="noopener noreferrer">MAGE.SPACE</a> генерирует картинки и видео. Бесплатно!!!
-</li>
-  <li>Сайт HUGGING FACE<a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-dev" target="_blank" rel="noopener noreferrer"> SPACES</a> Пространство для тестирования новинок нейросетей</li>
-  <li>Сайт <a href="https://www.recraft.ai/" target="_blank" rel="noopener noreferrer">Нейросеть RECRAFT.AI</a> от основательницы Яндекса. В настоящий момент из-за санкций временно не доступна</li>
-  <li>Перенос лица с фото на генеративное изображение <a href="https://huggingface.co/spaces/yanze/PuLID-FLUX" target="_blank" rel="noopener noreferrer">PulID FLUX</a> </li>
-  <li>Генерация 3D моделей с экспортом в Blender <a href="https://www.tripo3d.ai/app/home" target="_blank" rel="noopener noreferrer"> Tripo3d.ai</a> </li>
-  <li>Увеличение разрешения с помощью ИИ <a href="https://huggingface.co/spaces/jasperai/Flux.1-dev-Controlnet-Upscaler" target="_blank" rel="noopener noreferrer"> FLUX ControlNet Upscale</a> </li>
-  <li>Генератор подсказок по категориям <a href="https://huggingface.co/spaces/gokaygokay/FLUX-Prompt-Generator" target="_blank" rel="noopener noreferrer"> с помощью LLM</a> </li>
-  <li>Видео генератор <a href="https://lumalabs.ai/dream-machine" target="_blank" rel="noopener noreferrer"> LUMA</a> </li>
-  <li>Видео генератор <a href="https://www.hedra.com/" target="_blank" rel="noopener noreferrer"> HEDRA</a> с синтезом речи </li>
-  <li>Стили художников <a href="https://cheatsheet.strea.ly/" target="_blank" rel="noopener noreferrer"> ОООЧЕНЬ тормозит </a> из-за огромной коллекции</li>
+    <li>
+        Сайт <a href="https://www.mage.space/" target="_blank" rel="noopener noreferrer">MAGE.SPACE</a> генерирует картинки и видео. Бесплатно!!!
+    </li>
+    <li>Сайт HUGGING FACE<a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-dev" target="_blank" rel="noopener noreferrer"> SPACES</a> Пространство для тестирования новинок нейросетей</li>
+    <li>Сайт <a href="https://www.recraft.ai/" target="_blank" rel="noopener noreferrer">Нейросеть RECRAFT.AI</a> от основательницы Яндекса. В настоящий момент из-за санкций временно не доступна</li>
+    <li>Перенос лица с фото на генеративное изображение <a href="https://huggingface.co/spaces/yanze/PuLID-FLUX" target="_blank" rel="noopener noreferrer">PulID FLUX</a> </li>
+    <li>Генерация 3D моделей с экспортом в Blender <a href="https://www.tripo3d.ai/app/home" target="_blank" rel="noopener noreferrer"> Tripo3d.ai</a> </li>
+    <li>Увеличение разрешения с помощью ИИ <a href="https://huggingface.co/spaces/jasperai/Flux.1-dev-Controlnet-Upscaler" target="_blank" rel="noopener noreferrer"> FLUX ControlNet Upscale</a> </li>
+    <li>Генератор подсказок по категориям <a href="https://huggingface.co/spaces/gokaygokay/FLUX-Prompt-Generator" target="_blank" rel="noopener noreferrer"> с помощью LLM</a> </li>
+    <li>Видео генератор <a href="https://lumalabs.ai/dream-machine" target="_blank" rel="noopener noreferrer"> LUMA</a> </li>
+    <li>Видео генератор <a href="https://www.hedra.com/" target="_blank" rel="noopener noreferrer"> HEDRA</a> с синтезом речи </li>
+    <li>Стили художников <a href="https://cheatsheet.strea.ly/" target="_blank" rel="noopener noreferrer"> ОООЧЕНЬ тормозит </a> из-за огромной коллекции</li>
+    <li>Создание CANNY, DEPTH, POSE <a href="https://posemy.art/app/" target="_blank" rel="noopener noreferrer"> из позы человека или животного </a></li>
 
 
 
