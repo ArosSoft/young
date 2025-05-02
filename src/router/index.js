@@ -6,6 +6,7 @@ import Neuroart from '../views/Neuroart.vue' // Компонент для стр
 import Graffiti from '../views/Graffiti.vue' // Компонент для страницы "Граффити"
 import Volonter from '../views/Volonter.vue' 
 import Maker from '../views/Maker.vue' 
+import MakeProject from '../views/MakeProject.vue' 
 
 // Создание маршрутизатора с определением маршрутов для каждого пути
 const router = createRouter({
@@ -45,6 +46,11 @@ const router = createRouter({
             path: '/maker', // Путь для страницы "Волонтер"
             name: 'maker', // Имя маршрута
             component: Maker // Компонент, который будет отображаться
+        },
+        {
+            path: '/makeProject', // Путь для страницы "Проекты"
+            name: 'make', // Имя маршрута
+            component: MakeProject // Компонент, который будет отображаться
         }
     ]
 })

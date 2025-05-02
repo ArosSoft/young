@@ -27,6 +27,7 @@
                 <router-link to="/graffiti">Граффити</router-link>
                 <router-link to="/volonter">Волонтёрство</router-link>
                 <router-link to="/maker">Мэйкерство</router-link>
+                <router-link to="/makeProject">Сделай проект</router-link>
             </nav>
         </div>
     </header>
