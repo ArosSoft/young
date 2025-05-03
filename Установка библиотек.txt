@@ -1,0 +1,2 @@
+npm install highlight.js
+npm install firebase

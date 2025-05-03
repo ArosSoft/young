@@ -2,30 +2,6 @@
 import { ref, onMounted } from 'vue';
 import { auth, db, ref as dbRef, push, onValue, remove, update } from '../firebase';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import MarkdownIt from 'markdown-it';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css'; // Или другой стиль из https://highlightjs.org/static/demo/
-
-// Инициализация Markdown с подсветкой кода
-const md = new MarkdownIt({
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(str, { language: lang }).value;
-      } catch (__) {}
-    }
-    return ''; // Используем кавычки по умолчанию для кода без указания языка
-  }
-});
-
-// Добавляем состояние для отображения формы
-const showForm = ref(false);
-
-// Добавляем метод для переключения формы
-const toggleForm = () => {
-    showForm.value = !showForm.value;
-};
-
 
 const projectForm = ref({
     title: '',
@@ -86,24 +62,6 @@ const handleImageUpload = (event) => {
     }
 };
 
-const deleteProject = (projectId, projectAuthorId) => {
-    if (!user.value) return;
-
-    if (isAdmin.value || user.value.uid === projectAuthorId) {
-        if (confirm('Вы уверены, что хотите удалить этот проект?')) {
-            remove(dbRef(db, `projects/${projectId}`));
-        }
-    }
-};
-
-const approveProject = (projectId) => {
-    if (!isAdmin.value) return;
-    
-    update(dbRef(db, `projects/${projectId}`), {
-        approved: true
-    });
-};
-
 const addProject = async () => {
     if (!user.value) return;
     
@@ -116,12 +74,14 @@ const addProject = async () => {
     try {
         let imageUrl = '';
         
+        // Загружаем изображение, если оно есть
         if (projectForm.value.image) {
             const imageRef = storageRef(storage, `project-images/${Date.now()}_${projectForm.value.image.name}`);
             await uploadBytes(imageRef, projectForm.value.image);
             imageUrl = await getDownloadURL(imageRef);
         }
 
+        // Сохраняем проект в базу данных
         const newProject = {
             title: projectForm.value.title,
             description: projectForm.value.description,
@@ -132,11 +92,12 @@ const addProject = async () => {
             author: user.value.displayName || user.value.email,
             authorId: user.value.uid,
             timestamp: Date.now(),
-            approved: isAdmin.value
+            approved: isAdmin.value // Если админ, сразу одобряем
         };
 
         push(dbRef(db, 'projects'), newProject);
 
+        // Очищаем форму
         projectForm.value = {
             title: '',
             description: '',
@@ -156,27 +117,30 @@ const addProject = async () => {
     }
 };
 
-// Добавляем computed-свойство для рендеринга описания
-const renderMarkdown = (text) => {
-    return md.render(text || '');
+const deleteProject = (projectId, projectAuthorId) => {
+    if (!user.value) return;
+
+    if (isAdmin.value || user.value.uid === projectAuthorId) {
+        if (confirm('Вы уверены, что хотите удалить этот проект?')) {
+            remove(dbRef(db, `projects/${projectId}`));
+        }
+    }
 };
 
+const approveProject = (projectId) => {
+    if (!isAdmin.value) return;
+    
+    update(dbRef(db, `projects/${projectId}`), {
+        approved: true
+    });
+};
 </script>
 
 <template>
     <div class="projects-section">
         <h2>Детские проекты</h2>
 
-        <!-- Кнопка для показа/скрытия формы -->
-        <div v-if="user" class="form-toggle">
-            <button @click="toggleForm" class="toggle-button">
-                {{ showForm ? 'Скрыть форму' : 'Добавить проект' }}
-            </button>
-        </div>
-
-        <!-- Форма добавления проекта (теперь обернута в v-if) -->
-        <div v-if="user && showForm" class="project-form">
-            <!-- Содержимое формы без изменений -->
+        <div v-if="user" class="project-form">
             <div class="form-group">
                 <label>Название проекта*</label>
                 <input v-model="projectForm.title" placeholder="Введите название проекта">
@@ -213,10 +177,9 @@ const renderMarkdown = (text) => {
             <button @click="addProject">Отправить проект</button>
         </div>
         
-        <div v-else-if="!user" class="auth-prompt">
+        <div v-else class="auth-prompt">
             <p>Чтобы добавить проект, пожалуйста, войдите в систему.</p>
         </div>
-
 
         <div class="projects-list">
             <template v-for="project in projects" :key="project.id">
@@ -224,7 +187,7 @@ const renderMarkdown = (text) => {
                      class="project-card" 
                      :class="{ 'pending': !project.approved }">
                     <div class="project-header">
-                        <h2>{{ project.title }}</h2>
+                        <h3>{{ project.title }}</h3>
                         <div class="project-actions">
                             <button v-if="isAdmin && !project.approved"
                                     @click="approveProject(project.id)"
@@ -243,8 +206,8 @@ const renderMarkdown = (text) => {
                         <img :src="project.imageUrl" :alt="project.title">
                     </div>
                     
-                    <p class="project-description" v-html="renderMarkdown(project.description)"></p>
-
+                    <p class="project-description">{{ project.description }}</p>
+                    
                     <div v-if="project.links && project.links.length" class="project-links">
                         <h4>Ссылки:</h4>
                         <ul>
@@ -283,32 +246,6 @@ const renderMarkdown = (text) => {
 </template>
 
 <style scoped>
-/* Добавляем стили для подсветки кода */
-.project-description >>> pre {
-    background: #f6f8fa;
-    padding: 16px;
-    border-radius: 6px;
-    overflow: auto;
-    margin: 15px 0;
-}
-
-.project-description >>> code {
-    font-family: 'Courier New', Courier, monospace;
-    background: #f6f8fa;
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
-    font-size: 85%;
-}
-
-.project-description >>> pre code {
-    padding: 0;
-    background: transparent;
-}
-
-.project-description >>> .hljs {
-    background: #f6f8fa;
-}
-
 .projects-section {
     max-width: 800px;
     margin: 0 auto;

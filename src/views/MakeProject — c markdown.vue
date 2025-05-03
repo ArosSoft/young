@@ -18,15 +18,6 @@ const md = new MarkdownIt({
   }
 });
 
-// Добавляем состояние для отображения формы
-const showForm = ref(false);
-
-// Добавляем метод для переключения формы
-const toggleForm = () => {
-    showForm.value = !showForm.value;
-};
-
-
 const projectForm = ref({
     title: '',
     description: '',
@@ -167,16 +158,7 @@ const renderMarkdown = (text) => {
     <div class="projects-section">
         <h2>Детские проекты</h2>
 
-        <!-- Кнопка для показа/скрытия формы -->
-        <div v-if="user" class="form-toggle">
-            <button @click="toggleForm" class="toggle-button">
-                {{ showForm ? 'Скрыть форму' : 'Добавить проект' }}
-            </button>
-        </div>
-
-        <!-- Форма добавления проекта (теперь обернута в v-if) -->
-        <div v-if="user && showForm" class="project-form">
-            <!-- Содержимое формы без изменений -->
+        <div v-if="user" class="project-form">
             <div class="form-group">
                 <label>Название проекта*</label>
                 <input v-model="projectForm.title" placeholder="Введите название проекта">
@@ -213,10 +195,9 @@ const renderMarkdown = (text) => {
             <button @click="addProject">Отправить проект</button>
         </div>
         
-        <div v-else-if="!user" class="auth-prompt">
+        <div v-else class="auth-prompt">
             <p>Чтобы добавить проект, пожалуйста, войдите в систему.</p>
         </div>
-
 
         <div class="projects-list">
             <template v-for="project in projects" :key="project.id">
