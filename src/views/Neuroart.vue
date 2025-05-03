@@ -25,8 +25,10 @@ import MoreButton from '/src/components/MoreButton.vue';
     <li>Генератор подсказок по категориям <a href="https://huggingface.co/spaces/gokaygokay/FLUX-Prompt-Generator" target="_blank" rel="noopener noreferrer"> с помощью LLM</a> </li>
     <li>Видео генератор <a href="https://lumalabs.ai/dream-machine" target="_blank" rel="noopener noreferrer"> LUMA</a> </li>
     <li>Видео генератор <a href="https://www.hedra.com/" target="_blank" rel="noopener noreferrer"> HEDRA</a> с синтезом речи </li>
+    <li>Видео генератор <a href="https://www.vidu.com/" target="_blank" rel="noopener noreferrer"> VIDU</a></li>
     <li>Стили художников <a href="https://cheatsheet.strea.ly/" target="_blank" rel="noopener noreferrer"> ОООЧЕНЬ тормозит </a> из-за огромной коллекции</li>
     <li>Создание CANNY, DEPTH, POSE <a href="https://posemy.art/app/" target="_blank" rel="noopener noreferrer"> из позы человека или животного </a></li>
+    <li>Создать персонажа <a href="https://huggingface.co/spaces/InstantX/InstantCharacter" target="_blank" rel="noopener noreferrer"> на основе референса  </a></li>
 
 
 
