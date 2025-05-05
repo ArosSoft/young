@@ -1,24 +1,27 @@
+/* main.css */
 @import "./base.css";
 
 /* Добавляем фоновое изображение */
 body {
     background-image: url('./background.jpg');
-    background-attachment: fixed; /* Фиксируем фон */
-    background-size: cover; /* Растягиваем на весь экран */
-    background-position: center; /* Центрируем */
-    background-repeat: no-repeat; /* Запрещаем повторение */
-    min-height: 100vh; /* Минимальная высота на весь экран */
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
 #app {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 4rem;
+    padding: 1rem; /* Уменьшено с 4rem */
     font-weight: normal;
-    background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый фон для контента */
-    border-radius: 8px; /* Закругленные углы */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Тень для лучшей читаемости */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 0.5rem); 
 }
 
 a,
@@ -26,6 +29,30 @@ a,
     text-decoration: none;
     color: hsla(160, 100%, 37%, 0.8);
     transition: 0.4s;
+    padding: 0.2rem;
+}
+
+/* Мобильные стили */
+@media (max-width: 767px) {
+    #app {
+        padding: 0.5rem; 
+        border-radius: 4px; 
+        margin: 0.25rem auto; 
+    }
+    
+    body {
+        background-attachment: scroll;
+    }
+    
+    img {
+        margin: 0.25rem 0;
+        max-width: 100%;
+    }
+    
+    p, h1, h2, h3, h4, h5, h6 {
+        margin: 0.5rem 0; 
+        padding: 0 0.25rem; 
+    }
 }
 
 @media (hover: hover) {
@@ -34,17 +61,24 @@ a,
     }
 }
 
+@media (min-width: 768px) {
+    #app {
+        padding: 2rem; 
+    }
+}
+
 @media (min-width: 1024px) {
     body {
         display: flex;
         place-items: center;
-        padding: 2rem; /* Добавляем отступы по краям */
+        padding: 1rem; 
     }
 
     #app {
         display: grid;
         grid-template-columns: 2fr 3fr;
-        padding: 0 2rem 2rem;
-        min-height: 80vh; /* Минимальная высота для больших экранов */
+        padding: 0 1rem 1rem; 
+        min-height: 80vh;
     }
 }
+

@@ -157,4 +157,5 @@ import MoreButton from './MoreButton.vue';
             padding: 10px 0;
         }
     }
+
 </style>
