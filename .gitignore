@@ -8,8 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 .vs
-1
-node_modules
+
+node_modules/@firebase
+node_modules/firebase
+
 .DS_Store
 #dist
 #dist-ssr

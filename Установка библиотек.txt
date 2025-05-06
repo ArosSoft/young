@@ -1,2 +1,8 @@
+Переустановите зависимости
+Удалите node_modules и package-lock.json , затем установите заново:
+
+npm install
+
+(Тогда не нужно нижнее
 npm install highlight.js
-npm install firebase
+npm install firebase)
