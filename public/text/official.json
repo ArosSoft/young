@@ -6,9 +6,7 @@
       "link": "https://dobro.ru/event/11069440",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": "+7-920-242-30-88"
@@ -19,38 +17,21 @@
       "link": "https://dobro.ru/event/11069440",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
-      "address": "",
-      "phone_number": ""
+      "address": " ",
+      "phone_number": " "
     },
     {
       "name": "Мы вместе",
       "activities": "Оказание помощи переселенцам из Донбасса",
       "link": "https://mvmeste.ru",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": " ",
+        "telegram": " "
       },
-      "address": "",
-      "phone_number": ""
-    },
-    {
-      "name": "Туристический волонтерский отряд",
-      "activities": "Организация туристических событий и праздников",
-      "link": "",
-      "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
-      },
-      "address": "",
-      "phone_number": ""
+      "address": "г. Липецк, ул. Осипенко, д. 18",
+      "phone_number": "+7-915-551-91-71"
     },
     {
       "name": "Марафон здоровья",
@@ -58,9 +39,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -71,9 +50,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -84,9 +61,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -97,9 +72,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -110,9 +83,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -123,9 +94,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -136,9 +105,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -149,25 +116,22 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
     },
     {
-      "name": "Молодёжный совет",
+      "name": "Молодёжный парламент",
       "activities": "Активизация молодёжи в общественной жизни",
-      "link": "",
+      "link": "http://www.sovetskaya22.ru/",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/molparl48",
+        "telegram": ""
       },
-      "address": "",
-      "phone_number": ""
+      "address": "г. Липецк, ул. Советская, д. 22",
+      "phone_number": "",
+      "email":"mol_parlament_lip@mail.ru"
     },
     {
       "name": "Энерговорот",
@@ -175,9 +139,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -188,9 +150,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -201,11 +161,9 @@
       "link": "",
       "social_media": {
         "vkontakte": "https://vk.com/sllo_lipetsk",
-        "telegram": "https://t.me/sllo_lipetsk",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": "https://t.me/sllo_lipetsk"
       },
-      "address": "",
+      "address": "г. Липецк, ул. Гагарина, д. 35а",
       "phone_number": ""
     },
     {
@@ -213,10 +171,8 @@
       "activities": "Группа волонтёров, помогающих бездомным животным, оказывающих поддержку и заботу.",
       "link": "http://priut-info.ru/lipetsk",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/club13050764",
+        "telegram": ""
       },
       "address": "",
       "phone_number": ""
@@ -224,25 +180,21 @@
     {
       "name": "Приют для животных 'Территория спасения'",
       "activities": "Приют, который спасает, содержит, вакцинирует, лечит и стерилизует животных, а также ищет им новые семьи.",
-      "link": "https://vk.com/territoriya_spaseniya",
+      "link": " ",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/territoriya_spaseniya",
+        "telegram": ""
       },
       "address": "",
-      "phone_number": ""
+      "phone_number": " +7-904-698-11-56; +7-904-141-05-53"
     },
     {
       "name": "Фонд 'РЭЙ'",
       "activities": "Фонд помогает бездомным животным, оказывает помощь в лечении, стерилизации, поиске дома, а также проводит образовательные мероприятия.",
       "link": "https://rayfund.ru",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/fundray",
+        "telegram": "https://t.me/fundray"
       },
       "address": "",
       "phone_number": "",
@@ -253,26 +205,22 @@
       "activities": "Организация, которая уже более 10 лет помогает бездомным животным обрести семьи, проводит акции по сбору корма и уроки доброты для детей.",
       "link": "https://www.kotodetki.ru",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/kotodetki",
+        "telegram": ""
       },
       "address": "",
-      "phone_number": ""
+      "phone_number": "+7-495-203-07-24"
     },
     {
       "name": "Ресурсный центр добровольчества Липецкой области",
       "activities": "Поддержка и координация волонтерских инициатив в Липецкой области, проведение конкурсов и мероприятий",
-      "link": "",
+      "link": "http://xn--80abbieg2bwhzlnb8fvb.xn--p1ai/rcd/info/",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/dobrolip48",
+        "telegram": ""
       },
-      "address": "г. Липецк, ул. Примерная, д. 10",
-      "phone_number": "+7 (4742) 123-456",
+      "address": "г. Липецк, ул. Советская, д. 7",
+      "phone_number": "+7 (4742) 230-170",
       "email": "info@lipetskvolunteers.ru"
     },
     {
@@ -281,9 +229,7 @@
       "link": "",
       "social_media": {
         "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "telegram": ""
       },
       "address": "г. Липецк, пр. Мира, д. 25",
       "phone_number": "+7 (4742) 654-321",
@@ -292,15 +238,13 @@
     {
       "name": "Волонтерское движение «Чистый Липецк»",
       "activities": "Сбор и утилизация мусора, проведение акций по раздельному сбору отходов",
-      "link": "",
+      "link": "https://ecosfera48.ru/?page_id=42831",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/lipetskestafeta48",
+        "telegram": ""
       },
-      "address": "г. Липецк, ул. Советская, д. 12",
-      "phone_number": "+7 (4742) 987-654",
+      "address": " ",
+      "phone_number": "+7-903-028-04-07",
       "email": "cleanlipetsk@mail.ru"
     },
     {
@@ -308,10 +252,8 @@
       "activities": "Содействие соблюдению прав и свобод инвалидов, проведение реабилитации средствами физкультуры и спорта, объединение инвалидов по интересам, развитие творческих способностей. Организация активно взаимодействует с властями и оказывает адресную помощь членам ВОИ.",
       "link": "https://www.voi.ru/o_nas/regionalnye_organizaci/oblasti_rf/lipetskaya_oblast",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/club220300670",
+        "telegram": ""
       },
       "address": "г. Липецк, ул. Желябова, д. 7",
       "phone_number": "8-474-227-51-55, 8-474-227-87-59, 8-4742-27-25-18"
@@ -319,25 +261,22 @@
     {
       "name": "Липецкая региональная общественная организация инвалидов 'Школа Мастеров'",
       "activities": "Организация работает по стандарту организатора волонтерской деятельности, занимается поддержкой и развитием инвалидов через творческие и образовательные проекты.",
-      "link": "https://dobro.ru/event/10519076",
+      "link": "http://shkolamasterovlipetsk.ru/",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/shk_mas",
+        "telegram": "https://t.me/shkolamasterov48"
       },
       "address": "",
-      "phone_number": ""
+      "phone_number": "",
+      "email": "shkola-masterov@rambler.ru; shkokamasterov48@mail.ru"
     },
     {
       "name": "Липецкое региональное отделение Общероссийской общественной организации инвалидов 'Всероссийское общество глухих'",
       "activities": "Пропаганда здорового образа жизни, помощь в реабилитации пациентов на базе Липецкой городской больницы №4.",
-      "link": "",
+      "link": "https://www.lrovog.ru/",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/lrooooivog",
+        "telegram": ""
       },
       "address": "г. Липецк, Интернациональная улица, 34, 1",
       "phone_number": "+7 (4742) 27-67-58, +7 (4742) 27-43-04"
@@ -345,12 +284,10 @@
     {
       "name": "Центр реабилитации инвалидов и пожилых людей 'Сосновый бор'",
       "activities": "Осуществляет комплексную реабилитацию инвалидов с нарушениями опорно-двигательного аппарата, предоставляет социально-бытовую и профессиональную реабилитацию, обучение по 8 профессиям.",
-      "link": "",
+      "link": "https://www.sb-lip.ru/",
       "social_media": {
-        "vkontakte": "",
-        "telegram": "",
-        "whatsapp": "",
-        "odnoklassniki": ""
+        "vkontakte": "https://vk.com/sosnovyibor48",
+        "telegram": ""
       },
       "address": "г. Липецк, ул. Морская, владение 2а",
       "phone_number": "+7 (4742) 43-34-30",
