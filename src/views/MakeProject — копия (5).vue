@@ -30,11 +30,8 @@ const projectForm = ref({
     image: null,
     links: '',
     tools: '',
-    materials: '',
-    grade: null // Добавляем поле для хранения выбранного квантума
+    materials: ''
 });
-
-const gradeOptions = ["IT", "РОБО", "БИО", "ХАЙТЕК", "НАНО", "АЭРО", "ГЕО", "МЕДИА", "НЕТ" ]; // Список доступных квантумов
 
 const projects = ref([]);
 const user = ref(null);
@@ -123,67 +120,65 @@ const approveProject = async (projectId) => {
         console.error('Ошибка при одобрении:', error);
         alert('Не удалось одобрить проект');
     }
-    };
+};
 
-    const addProject = async () => {
-        if (!user.value || isLoading.value) return;
+const addProject = async () => {
+    if (!user.value || isLoading.value) return;
+    
+    if (!projectForm.value.title.trim() || !projectForm.value.description.trim()) {
+        alert('Пожалуйста, заполните название и описание проекта');
+        return;
+    }
 
-        if (!projectForm.value.title.trim() || !projectForm.value.description.trim() || !projectForm.value.grade) {
-            alert('Пожалуйста, заполните название, описание проекта и укажите класс');
-            return;
+    isLoading.value = true;
+    
+    try {
+        let imageUrl = '';
+        
+        if (projectForm.value.image) {
+            imageUrl = await uploadImageToImgBB(projectForm.value.image);
+            if (!imageUrl) {
+                alert('Не удалось загрузить изображение. Попробуйте другое изображение.');
+                return;
+            }
         }
 
-        isLoading.value = true;
+        const newProject = {
+            title: projectForm.value.title,
+            description: projectForm.value.description,
+            imageUrl,
+            links: projectForm.value.links.split(',').map(link => link.trim()).filter(link => link),
+            tools: projectForm.value.tools.split(',').map(tool => tool.trim()).filter(tool => tool),
+            materials: projectForm.value.materials.split(',').map(mat => mat.trim()).filter(mat => mat),
+            author: user.value.displayName || user.value.email,
+            authorId: user.value.uid,
+            timestamp: Date.now(),
+            approved: isAdmin.value
+        };
 
-        try {
-            let imageUrl = '';
+        await push(dbRef(db, 'projects'), newProject);
 
-            if (projectForm.value.image) {
-                imageUrl = await uploadImageToImgBB(projectForm.value.image);
-                if (!imageUrl) {
-                    alert('Не удалось загрузить изображение. Попробуйте другое изображение.');
-                    return;
-                }
-            }
+        projectForm.value = {
+            title: '',
+            description: '',
+            image: null,
+            links: '',
+            tools: '',
+            materials: ''
+        };
+        imagePreview.value = null;
+        showForm.value = false;
 
-            const newProject = {
-                title: projectForm.value.title,
-                description: projectForm.value.description,
-                grade: projectForm.value.grade, // Добавляем квантуи в проект
-                imageUrl,
-                links: projectForm.value.links.split(',').map(link => link.trim()).filter(link => link),
-                tools: projectForm.value.tools.split(',').map(tool => tool.trim()).filter(tool => tool),
-                materials: projectForm.value.materials.split(',').map(mat => mat.trim()).filter(mat => mat),
-                author: user.value.displayName || user.value.email,
-                authorId: user.value.uid,
-                timestamp: Date.now(),
-                approved: isAdmin.value
-            };
-
-            await push(dbRef(db, 'projects'), newProject);
-
-            projectForm.value = {
-                title: '',
-                description: '',
-                grade: null,
-                image: null,
-                links: '',
-                tools: '',
-                materials: ''
-            };
-            imagePreview.value = null;
-            showForm.value = false;
-
-            if (!isAdmin.value) {
-                alert('Ваш проект отправлен на модерацию. Он появится после проверки администратором.');
-            }
-        } catch (error) {
-            console.error('Ошибка при добавлении проекта:', error);
-            alert('Произошла ошибка при сохранении проекта');
-        } finally {
-            isLoading.value = false;
+        if (!isAdmin.value) {
+            alert('Ваш проект отправлен на модерацию. Он появится после проверки администратором.');
         }
-    };
+    } catch (error) {
+        console.error('Ошибка при добавлении проекта:', error);
+        alert('Произошла ошибка при сохранении проекта');
+    } finally {
+        isLoading.value = false;
+    }
+};
 
 const renderMarkdown = (text) => md.render(text || '');
 </script>
@@ -203,13 +198,13 @@ const renderMarkdown = (text) => md.render(text || '');
                 <label>Название проекта*</label>
                 <input v-model="projectForm.title" placeholder="Введите название проекта">
             </div>
-
+            
             <div class="form-group">
                 <label>Описание проекта*</label>
                 <textarea v-model="projectForm.description" placeholder="Опишите ваш проект..."></textarea>
                 <small>Поддерживается Markdown и код</small>
             </div>
-
+            
             <div class="form-group">
                 <label>Изображение проекта (макс. 5MB)</label>
                 <input type="file" @change="handleImageUpload" accept="image/*">
@@ -217,35 +212,22 @@ const renderMarkdown = (text) => md.render(text || '');
                     <img :src="imagePreview" alt="Превью изображения">
                 </div>
             </div>
-
+            
             <div class="form-group">
                 <label>Ссылки (через запятую) на презентацию, сайт, телеграм, Вконтакте и т.п. </label>
                 <input v-model="projectForm.links" placeholder="https://github.com/..., https://vk.com/...">
             </div>
-
+            
             <div class="form-group">
                 <label>Инструменты (через запятую)</label>
                 <input v-model="projectForm.tools" placeholder="3D-принтер, Arduino, Photoshop...">
             </div>
-
+            
             <div class="form-group">
                 <label>Материалы (через запятую)</label>
                 <input v-model="projectForm.materials" placeholder="Дерево, пластик, картон...">
             </div>
-
-            <div class="form-group">
-                <label>Квантум</label>
-                <div class="grade-buttons">
-                    <button v-for="grade in gradeOptions"
-                            :key="grade"
-                            @click.prevent="projectForm.grade = grade"
-                            :class="{ active: projectForm.grade === grade }"
-                            class="grade-button">
-                        {{ grade }}
-                    </button>
-                </div>
-            </div>
-
+            
             <button @click="addProject" :disabled="isLoading">
                 {{ isLoading ? 'Отправка...' : 'Отправить проект' }}
             </button>
@@ -307,7 +289,6 @@ const renderMarkdown = (text) => md.render(text || '');
                     
                     <div class="project-footer">
                         <small>Автор: {{ project.author }}</small>
-                        <small>Квантум: {{ project.grade }}</small>
                         <small>{{ new Date(project.timestamp).toLocaleString() }}</small>
                     </div>
                     
@@ -325,36 +306,6 @@ const renderMarkdown = (text) => md.render(text || '');
 </template>
 
 <style scoped>
-
-    .grade-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 8px;
-    }
-
-    .grade-button {
-        width: 80px;
-        height: 40px;
-        border-radius: 10px;
-        background-color: #c0c0c0;
-        border: 1px solid #ddd;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-    }
-
-        .grade-button:hover {
-            background-color: #e0e0e0;
-        }
-
-        .grade-button.active {
-            background-color: #42b983;
-            color: white;
-            border-color: #42b983;
-        }
 
 .projects-section {
     max-width: 900px;
@@ -575,17 +526,15 @@ button:disabled {
     word-break: break-all;
 }
 
-    .project-footer {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-        color: #7f8c8d;
-        font-size: 0.9em;
-        padding-top: 15px;
-        border-top: 1px solid #eee;
-    }
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #7f8c8d;
+    font-size: 0.9em;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
 
 .moderation-notice {
     color: #e67e22;
