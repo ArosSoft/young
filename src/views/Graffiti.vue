@@ -11,14 +11,15 @@ import MoreButton from '/src/components/MoreButton.vue';
         <MoreButton fileName="./young/text/g1.txt" imageSrc="./images/cat2.png" />
     </div>
 <div>
-<h1>Сайты по граффити</h1>
+
+<h2>Сайты по граффити</h2>
 
 <ol>
-  <li>Сайт <a href="https://www.mage.space/" target="_blank" rel="noopener noreferrer">MAGE.SPACE</a> генерирует картинки и видео. Бесплатно!!!
-</li>
-
+    <li>Сайт <a href="https://vk.com/spraay" target="_blank" rel="noopener noreferrer">«SPRAAY»</a>  - крупнейший онлайн граффити журнал существующий с 2012 года. Публикует работы, видео и новости связанные с отечественными граффити художниками!</li>
+    <li>Сайт <a href="https://petrograff.ru/" target="_blank" rel="noopener noreferrer">«Petrograff»</a>  - петербургский журнал и новостной блог о граффити культуре, и уличном искусстве, интернет-магазин.</li>
 </ol>
-  <h1> Граффити г. Липецка </h1>
+ 
+<h2> Граффити г. Липецка </h2>
 
 </div>
 
@@ -46,7 +47,9 @@ import MoreButton from '/src/components/MoreButton.vue';
         <ImageModal imageSrc="./images/c4.jpg" imageWidth="400px" />
     </div>
 </div>
-    <h1> Художники г. Липецка </h1>
+    
+    
+    <h2> Художники г. Липецка </h2>
     <!-- Изображения с текстом (промпты) -->
     <div class="prompt-item">
         <ImageModal imageSrc="./images/G1.jpg" imageWidth="150px" />

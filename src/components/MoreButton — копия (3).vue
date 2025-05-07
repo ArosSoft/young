@@ -130,21 +130,20 @@ html, body {
 
 .page-wrapper {
   width: 100%;
-  /* min-height: 100vh; */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 6px;
   box-sizing: border-box;
 }
 
-    .more-button {
-        width: 100%;
-        background: white;
-        border-radius: 4px;
-        padding: 12px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        margin-bottom: 12px; /* Добавлено для уменьшения отступа внизу */
-    }
+.more-button {
+  width: 100%;
+  background: white;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
 
 .content {
   display: flex;

@@ -11,7 +11,7 @@
         
         <!-- Логотип сайта -->
         <img src="./assets/logo.jpg"
-             style="width: 250px; height: auto; display: block; margin: 0 auto;"
+             style="width: 250px; height: auto; display: block; margin: 40px auto 0 auto;"
              alt="logo">
         
         <div class="wrapper">
