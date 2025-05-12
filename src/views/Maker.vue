@@ -90,32 +90,38 @@
 
                             <li>Сложите лист пополам вдоль длинной стороны, затем разверните.</li>
                             <div class="single-image">
+                                <ImageModal imageSrc="./images/make/20.jpg" alt="Шаг 2" imageWidth="300px" />
+                            </div>
+                           
+
+                            <li>Верхние углы загните как показано на картинках.</li>
+                            <div class="single-image">
                                 <ImageModal imageSrc="./images/make/2.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
 
-                            <li>Верхние углы загните к центральной линии.</li>
                             <div class="single-image">
                                 <ImageModal imageSrc="./images/make/4.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
 
-                            <li>Снова загните новые углы к центру.</li>
+                            <li>Снова загните верхние углы к центру.</li>
                             <div class="single-image">
                                 <ImageModal imageSrc="./images/make/6.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
-                            <li>Сложите самолетик пополам по центральной линии.</li>
-                             <div class="single-image">
+                            <div class="single-image">
                                 <ImageModal imageSrc="./images/make/8.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
 
-                            <li>Загните крылья, оставив примерно 1 см снизу для корпуса.</li>
+                            <li>Сложите самолетик пополам по центральной линии. 
+                            Загните крылья, оставив примерно 1 см снизу для корпуса.</li>
                             <div class="single-image">
                                 <ImageModal imageSrc="./images/make/10.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
-                            <li>Расправьте крылья под прямым углом к корпусу.</li>
                             <div class="single-image">
                                 <ImageModal imageSrc="./images/make/12.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
 
+                            <li>Расправьте крылья под прямым углом к корпусу.</li>
+                            
                         </ol>
                     </div>
 
@@ -124,23 +130,18 @@
                         <div class="container">
                             <!-- Одиночные изображения -->
                             <div class="single-image">
-                                <ImageModal imageSrc="./images/1.jpg" alt="Шаг 1" imageWidth="100px" />
+                                <ImageModal imageSrc="./images/make/19.jpg" alt="Шаг 1" imageWidth="300px" />
                             </div>
-                            <div class="single-image">
-                                <ImageModal imageSrc="./images/2.jpg" alt="Шаг 2" imageWidth="100px" />
-                            </div>
-                            <div class="single-image">
-                                <ImageModal imageSrc="./images/3.jpg" alt="Шаг 3" imageWidth="100px" />
-                            </div>
+                           
                         </div>
                     </div>
 
                     <div class="video-section">
                         <h3>🎥 Видеоинструкция</h3>
                         <div class="video-wrapper">
-                            <iframe width="720" height="405" src="https://rutube.ru/play/embed/e71e95f0b8fd215e7d3907daa2b563dd/"
-                                    frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                            <iframe width="720" height="405" src="https://rutube.ru/play/embed/0f15d7673cb3395b2898fc0a0008d70f/" 
+                            frameBorder="0" allow="clipboard-write; autoplay"
+                             webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                         </div>
                     </div>
 
@@ -155,7 +156,8 @@
 
                     <div class="thanks-section">
                         <h3>🙏 Благодарности</h3>
-                        <p>Спасибо волонтерам детского центра "Солнышко" за идею и тестирование этой инструкции.</p>
+                        <p>Спасибо Джону Коллинсу за идею и Станиславу Чавкину за тестирование этой инструкции.</p>
+                        <a href="https://makezine.com/projects/worlds-best-paper-airplane/">World’s Best Paper Airplane</a>
                     </div>
                 </div>
             </article>
@@ -260,8 +262,8 @@
     .single-image {
         margin: 10px;
         display: flex;
-        justify-content: right;
-        width: 400px;
+        justify-content: left;
+        width: 90%;
     }
 
     .podelki-container {
