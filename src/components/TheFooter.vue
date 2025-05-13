@@ -4,12 +4,12 @@
     <!-- Контент футера -->
     <div class="footer-content">
       <!-- Параграф с указанием текущего года и копирайта -->
-      <p>&copy; {{ currentYear }} Моё приложение. Все права защищены.</p>
+      <p>&copy; {{ currentYear }} Сделано кванторианцами</p>
       <!-- Блок с ссылками на дополнительные страницы -->
       <div class="footer-links">
-        <a href="#">Условия использования</a> |
-        <a href="#">Политика конфиденциальности</a> |
-        <a href="#">Контакты</a>
+          <a href="https://vk.com/arossoft">Контакты</a> |
+          <a href="https://vk.com/codimai">Нейроарт</a> |
+          <a href="https://vk.com/itkvant">Программирование для детей</a> 
       </div>
     </div>
   </footer>

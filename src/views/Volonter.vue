@@ -180,7 +180,7 @@ export default {
                         'Authorization': `Bearer ${apiKey}`
                     },
                     body: JSON.stringify({
-                        model: "mistral-tiny",
+                        model: "mistral-medium",
                         messages: [systemMessage, userMessage],
                         temperature: 0.7
                     })
