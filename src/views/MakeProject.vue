@@ -271,7 +271,7 @@ const toggleProject = (projectId) => {
         <div v-else class="projects-list">
             <div v-for="project in projects" :key="project.id" class="project-card">
                 <div class="project-header">
-                    <div class="project-title-section" @click="toggleProject(project.id)" style="cursor: pointer;">
+                    <div class="project-title-section" @click="toggleProject(project.id)">
                         <div v-if="project.imageUrl && !expandedProjects.has(project.id)" class="project-thumbnail">
                             <img :src="project.imageUrl" :alt="project.title">
                         </div>
@@ -643,22 +643,12 @@ button:disabled {
     display: flex;
     align-items: center;
     gap: 20px;
+    cursor: pointer;
     transition: opacity 0.2s;
 }
 
 .project-title-section:hover {
     opacity: 0.8;
-}
-
-.project-title-section h3 {
-    margin: 0;
-    font-size: 1.3em;
-    color: #2c3e50;
-    transition: color 0.2s;
-}
-
-.project-title-section:hover h3 {
-    color: #42b983;
 }
 
 .project-thumbnail {
@@ -673,6 +663,12 @@ button:disabled {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.project-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: #2c3e50;
 }
 
 @media (max-width: 768px) {
