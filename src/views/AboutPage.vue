@@ -5,7 +5,7 @@
       <h3>🚀 Социальная платформа для молодёжи: пространство для идей и взаимодействия</h3>
 
       <div class="team-section">
-        <h2>👥 Наша команда</h2>
+        <h2>😊 Наша команда</h2>
         <ul class="team-list">
           <li>🎨 Милославская Екатерина Николаевна - дизайн граффити</li>
           <li>💻 Набока Дмитрий Александрович - разработка сайта</li>
@@ -96,23 +96,23 @@
 
 h1 {
   color: #2c3e50;
-  font-size: 2.5em;
+  font-size: 2em;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 h2 {
   color: #2c3e50;
-  font-size: 1.8em;
-  margin: 30px 0 20px;
-  padding-bottom: 10px;
+  font-size: 1.5em;
+  margin: 25px 0 15px;
+  padding-bottom: 8px;
   border-bottom: 2px solid #42b983;
 }
 
 h3 {
   color: #2c3e50;
-  font-size: 1.4em;
-  margin: 20px 0 15px;
+  font-size: 1.2em;
+  margin: 15px 0 10px;
 }
 
 .team-section {
@@ -128,10 +128,10 @@ h3 {
 }
 
 .team-list li {
-  padding: 10px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #eee;
   color: #2c3e50;
-  font-size: 1.1em;
+  font-size: 0.95em;
 }
 
 .team-list li:last-child {
@@ -151,17 +151,17 @@ h3 {
 }
 
 .feature-list li, .features-list li {
-  margin: 15px 0;
-  padding: 10px;
+  margin: 8px 0;
+  padding: 6px;
   background: #f8f9fa;
   border-radius: 6px;
   color: #2c3e50;
-  font-size: 1.1em;
+  font-size: 0.95em;
 }
 
 .features-list li {
-  margin: 25px 0;
-  padding: 20px;
+  margin: 12px 0;
+  padding: 12px;
   background: #f8f9fa;
   border-radius: 8px;
 }
@@ -169,6 +169,17 @@ h3 {
 .features-list h3 {
   color: #42b983;
   margin-top: 0;
+}
+
+.features-list ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.features-list ul li {
+  margin: 4px 0;
+  padding: 4px;
+  background: transparent;
 }
 
 .importance-section {
@@ -180,18 +191,19 @@ h3 {
 
 .join-section {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #42b983;
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 25px;
+  padding: 15px;
   background: #f0f7f4;
   border-radius: 8px;
 }
 
 p {
   color: #2c3e50;
-  line-height: 1.6;
-  margin: 15px 0;
+  line-height: 1.5;
+  margin: 12px 0;
+  font-size: 0.95em;
 }
 
 @media (max-width: 768px) {
@@ -200,19 +212,19 @@ p {
   }
   
   .about-content {
-    padding: 20px;
+    padding: 15px;
   }
   
   h1 {
-    font-size: 2em;
+    font-size: 1.8em;
   }
   
   h2 {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
   
   h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 }
 </style>
