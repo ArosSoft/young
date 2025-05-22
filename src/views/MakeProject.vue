@@ -6,6 +6,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 
 const IMGBB_API_KEY = 'b360c6df64de404cbb27ca4079327252'; // Получите бесплатный ключ на https://api.imgbb.com/
+const IMGBB_API_KEY_IO = 'chv_IC_8dedbdbc5a2c5f22892ca966d81326dd2534f84f9e9ca168a28ea4afee9b440c410a9f6b63221519b4b4870b173756f18bf04833e9f09b865d6d56819461dba0';
 
     const md = new MarkdownIt({
   breaks: true, // Эта опция преобразует переводы строк в <br> теги
@@ -31,7 +32,8 @@ const projectForm = ref({
     links: '',
     tools: '',
     materials: '',
-    grade: null // Добавляем поле для хранения выбранного квантума
+    grade: null, // Добавляем поле для хранения выбранного квантума
+    additionalImages: []
 });
 
 const gradeOptions = ["IT", "РОБО", "БИО", "ХАЙТЕК", "НАНО", "АЭРО", "ГЕО", "МЕДИА", "НЕТ" ]; // Список доступных квантумов
@@ -40,6 +42,7 @@ const projects = ref([]);
 const user = ref(null);
 const isAdmin = ref(false);
 const imagePreview = ref(null);
+const additionalImagePreviews = ref([]);
 const isLoading = ref(false);
 const expandedProjects = ref(new Set()); // Добавляем состояние для отслеживания развернутых проектов
 
@@ -62,18 +65,73 @@ onMounted(() => {
     });
 });
 
-const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file && file.size > 5 * 1024 * 1024) {
-        alert('Размер изображения не должен превышать 5MB');
-        return;
-    }
-    
-    if (file) {
-        projectForm.value.image = file;
+const resizeImage = (file) => {
+    return new Promise((resolve) => {
         const reader = new FileReader();
-        reader.onload = (e) => imagePreview.value = e.target.result;
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+
+                // Вычисляем новые размеры с сохранением пропорций
+                if (width > height) {
+                    if (width > 1024) {
+                        height = Math.round((height * 1024) / width);
+                        width = 1024;
+                    }
+                } else {
+                    if (height > 1024) {
+                        width = Math.round((width * 1024) / height);
+                        height = 1024;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Конвертируем canvas в Blob
+                canvas.toBlob((blob) => {
+                    // Создаем новый File из Blob
+                    const resizedFile = new File([blob], file.name, {
+                        type: 'image/jpeg',
+                        lastModified: Date.now()
+                    });
+                    resolve(resizedFile);
+                }, 'image/jpeg', 0.85); // Качество JPEG 85%
+            };
+            img.src = e.target.result;
+        };
         reader.readAsDataURL(file);
+    });
+};
+
+const handleImageUpload = async (event, index = null) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+        // Уменьшаем размер изображения
+        const resizedFile = await resizeImage(file);
+        
+        if (index === null) {
+            projectForm.value.image = resizedFile;
+            const reader = new FileReader();
+            reader.onload = (e) => imagePreview.value = e.target.result;
+            reader.readAsDataURL(resizedFile);
+        } else {
+            projectForm.value.additionalImages[index] = resizedFile;
+            const reader = new FileReader();
+            reader.onload = (e) => additionalImagePreviews.value[index] = e.target.result;
+            reader.readAsDataURL(resizedFile);
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке изображения:', error);
+        alert('Произошла ошибка при обработке изображения');
     }
 };
 
@@ -138,20 +196,32 @@ const approveProject = async (projectId) => {
 
         try {
             let imageUrl = '';
+            let additionalImageUrls = [];
 
             if (projectForm.value.image) {
                 imageUrl = await uploadImageToImgBB(projectForm.value.image);
                 if (!imageUrl) {
-                    alert('Не удалось загрузить изображение. Попробуйте другое изображение.');
+                    alert('Не удалось загрузить основное изображение. Попробуйте другое изображение.');
                     return;
+                }
+            }
+
+            // Загружаем дополнительные изображения
+            for (const image of projectForm.value.additionalImages) {
+                if (image) {
+                    const url = await uploadImageToImgBB(image);
+                    if (url) {
+                        additionalImageUrls.push(url);
+                    }
                 }
             }
 
             const newProject = {
                 title: projectForm.value.title,
                 description: projectForm.value.description,
-                grade: projectForm.value.grade, // Добавляем квантуи в проект
+                grade: projectForm.value.grade,
                 imageUrl,
+                additionalImageUrls,
                 links: projectForm.value.links.split(',').map(link => link.trim()).filter(link => link),
                 tools: projectForm.value.tools.split(',').map(tool => tool.trim()).filter(tool => tool),
                 materials: projectForm.value.materials.split(',').map(mat => mat.trim()).filter(mat => mat),
@@ -168,11 +238,13 @@ const approveProject = async (projectId) => {
                 description: '',
                 grade: null,
                 image: null,
+                additionalImages: [],
                 links: '',
                 tools: '',
                 materials: ''
             };
             imagePreview.value = null;
+            additionalImagePreviews.value = [];
             showForm.value = false;
 
             if (!isAdmin.value) {
@@ -228,6 +300,14 @@ const toggleProject = (projectId) => {
             </div>
 
             <div class="form-group">
+                <label>Дополнительные изображения (макс. 5MB)</label>
+                <input v-for="(image, index) in projectForm.additionalImages" :key="index" type="file" @change="handleImageUpload($event, index)" accept="image/*">
+                <div v-for="(preview, index) in additionalImagePreviews" :key="index" class="image-preview">
+                    <img :src="preview" alt="Превью дополнительного изображения">
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label>Ссылки (через запятую) на презентацию, сайт, телеграм, Вконтакте и т.п. </label>
                 <input v-model="projectForm.links" placeholder="https://github.com/..., https://vk.com/...">
             </div>
@@ -276,11 +356,11 @@ const toggleProject = (projectId) => {
                             <img :src="project.imageUrl" :alt="project.title">
                         </div>
                         <h3>{{ project.title }}</h3>
-                    </div>
-                    <div class="project-actions">
-                        <button @click="toggleProject(project.id)" class="toggle-project-btn">
+                        <button @click.stop="toggleProject(project.id)" class="toggle-project-btn">
                             {{ expandedProjects.has(project.id) ? '🔼' : '🔽' }}
                         </button>
+                    </div>
+                    <div class="project-actions">
                         <button v-if="isAdmin || user?.uid === project.authorId" 
                                 @click="deleteProject(project.id, project.authorId)"
                                 class="delete-btn">
@@ -499,6 +579,7 @@ button:disabled {
 .project-actions {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .delete-btn {
@@ -539,7 +620,7 @@ button:disabled {
 .project-image img {
     max-width: 100%;
     max-height: 400px;
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
     object-fit: contain;
 }
@@ -624,27 +705,29 @@ button:disabled {
 }
 
 .toggle-project-btn {
-    background-color: transparent;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
     color: #666;
-    border: 1px solid #ddd;
-    padding: 8px 16px;
-    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s;
+    opacity: 0.1;
+    transition: opacity 0.2s;
 }
 
 .toggle-project-btn:hover {
-    background-color: #f5f5f5;
-    color: #333;
+    opacity: 0.3;
+    background: none;
 }
 
 .project-title-section {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     cursor: pointer;
     transition: opacity 0.2s;
+    flex: 1;
 }
 
 .project-title-section:hover {
@@ -654,9 +737,10 @@ button:disabled {
 .project-thumbnail {
     width: 80px;
     height: 80px;
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
     flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .project-thumbnail img {
