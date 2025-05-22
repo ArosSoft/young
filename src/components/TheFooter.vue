@@ -4,7 +4,7 @@
     <!-- Контент футера -->
     <div class="footer-content">
       <!-- Параграф с указанием текущего года и копирайта -->
-      <p>&copy; {{ currentYear }} Сделано кванторианцами</p>
+      <p>&copy; {{ currentYear }} Сделано кванторианцами с помощью ИИ DeepSeek и Cursor</p>
       <!-- Блок с ссылками на дополнительные страницы -->
       <div class="footer-links">
           <a href="https://vk.com/arossoft">Контакты</a> |

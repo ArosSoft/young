@@ -41,6 +41,7 @@ const user = ref(null);
 const isAdmin = ref(false);
 const imagePreview = ref(null);
 const isLoading = ref(false);
+const expandedProjects = ref(new Set()); // Добавляем состояние для отслеживания развернутых проектов
 
 onMounted(() => {
     auth.onAuthStateChanged(async (authUser) => {
@@ -186,6 +187,14 @@ const approveProject = async (projectId) => {
     };
 
 const renderMarkdown = (text) => md.render(text || '');
+
+const toggleProject = (projectId) => {
+    if (expandedProjects.value.has(projectId)) {
+        expandedProjects.value.delete(projectId);
+    } else {
+        expandedProjects.value.add(projectId);
+    }
+};
 </script>
 
 <template>
@@ -255,34 +264,44 @@ const renderMarkdown = (text) => md.render(text || '');
             <p>Чтобы добавить проект, пожалуйста, войдите в систему.</p>
         </div>
 
-        <div class="projects-list">
-            <template v-for="project in projects" :key="project.id">
-                <div v-if="project.approved || isAdmin" 
-                     class="project-card" 
-                     :class="{ 'pending': !project.approved }">
-                    <div class="project-header">
-                        <h3>{{ project.title }}</h3>
-                        <div class="project-actions">
-                            <button v-if="isAdmin && !project.approved"
-                                    @click="approveProject(project.id)"
-                                    class="approve-button">
-                                Одобрить
-                            </button>
-                            <button v-if="isAdmin || user?.uid === project.authorId"
-                                    @click="deleteProject(project.id, project.authorId)"
-                                    class="delete-button">
-                                Удалить
-                            </button>
+        <div v-if="projects.length === 0" class="no-projects">
+            Пока нет добавленных проектов
+        </div>
+
+        <div v-else class="projects-list">
+            <div v-for="project in projects" :key="project.id" class="project-card">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <div v-if="project.imageUrl && !expandedProjects.has(project.id)" class="project-thumbnail">
+                            <img :src="project.imageUrl" :alt="project.title">
                         </div>
+                        <h3>{{ project.title }}</h3>
                     </div>
-                    
+                    <div class="project-actions">
+                        <button @click="toggleProject(project.id)" class="toggle-project-btn">
+                            {{ expandedProjects.has(project.id) ? '🔼' : '🔽' }}
+                        </button>
+                        <button v-if="isAdmin || user?.uid === project.authorId" 
+                                @click="deleteProject(project.id, project.authorId)"
+                                class="delete-btn">
+                            Удалить
+                        </button>
+                        <button v-if="isAdmin && !project.approved" 
+                                @click="approveProject(project.id)"
+                                class="approve-btn">
+                            Одобрить
+                        </button>
+                    </div>
+                </div>
+
+                <div v-if="expandedProjects.has(project.id)" class="project-content">
                     <div v-if="project.imageUrl" class="project-image">
-                        <img :src="project.imageUrl" :alt="project.title" loading="lazy">
+                        <img :src="project.imageUrl" :alt="project.title">
                     </div>
-                    
+
                     <div class="project-description" v-html="renderMarkdown(project.description)"></div>
 
-                    <div v-if="project.links?.length" class="project-links">
+                    <div v-if="project.links && project.links.length" class="project-links">
                         <h4>Ссылки:</h4>
                         <ul>
                             <li v-for="(link, index) in project.links" :key="index">
@@ -290,35 +309,29 @@ const renderMarkdown = (text) => md.render(text || '');
                             </li>
                         </ul>
                     </div>
-                    
-                    <div v-if="project.tools?.length" class="project-tools">
+
+                    <div v-if="project.tools && project.tools.length" class="project-tools">
                         <h4>Инструменты:</h4>
                         <ul>
                             <li v-for="(tool, index) in project.tools" :key="index">{{ tool }}</li>
                         </ul>
                     </div>
-                    
-                    <div v-if="project.materials?.length" class="project-materials">
+
+                    <div v-if="project.materials && project.materials.length" class="project-materials">
                         <h4>Материалы:</h4>
                         <ul>
                             <li v-for="(material, index) in project.materials" :key="index">{{ material }}</li>
                         </ul>
                     </div>
-                    
+
                     <div class="project-footer">
-                        <small>Автор: {{ project.author }}</small>
-                        <small>Квантум: {{ project.grade }}</small>
-                        <small>{{ new Date(project.timestamp).toLocaleString() }}</small>
-                    </div>
-                    
-                    <div v-if="!project.approved" class="moderation-notice">
-                        [На модерации]
+                        <span>Автор: {{ project.author }}</span>
+                        <span>Квантум: {{ project.grade }}</span>
+                        <span v-if="!project.approved" class="moderation-notice">
+                            На модерации
+                        </span>
                     </div>
                 </div>
-            </template>
-            
-            <div v-if="projects.length === 0" class="no-projects">
-                <p>Пока нет проектов. Будьте первым!</p>
             </div>
         </div>
     </div>
@@ -463,37 +476,24 @@ button:disabled {
 }
 
 .project-card {
-    background-color: white;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    position: relative;
-    transition: transform 0.2s;
-}
-
-.project-card:hover {
-    transform: translateY(-3px);
-}
-
-.project-card.pending {
-    background-color: #fff8e6;
-    border-left: 5px solid #ffc107;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .project-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
 }
 
-.project-header h3 {
-    margin: 0;
-    color: #2c3e50;
-    font-size: 1.5em;
+.project-content {
+    padding: 20px;
 }
 
 .project-actions {
@@ -501,16 +501,34 @@ button:disabled {
     gap: 10px;
 }
 
-.delete-button {
-    background-color: #ff4444;
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
     padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-.approve-button {
-    background-color: #28a745;
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.approve-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
     padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.approve-btn:hover {
+    background-color: #0056b3;
 }
 
 .project-image {
@@ -532,7 +550,7 @@ button:disabled {
     color: #333;
 }
 
-.project-description >>> pre {
+.project-description :deep(pre) {
     background: #f6f8fa;
     padding: 16px;
     border-radius: 6px;
@@ -540,7 +558,7 @@ button:disabled {
     margin: 20px 0;
 }
 
-.project-description >>> code {
+.project-description :deep(code) {
     font-family: 'Courier New', Courier, monospace;
     background: #f6f8fa;
     padding: 0.2em 0.4em;
@@ -605,10 +623,57 @@ button:disabled {
     border: 1px dashed #ddd;
 }
 
+.toggle-project-btn {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.toggle-project-btn:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.project-title-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.project-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.project-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: #2c3e50;
+}
+
 @media (max-width: 768px) {
     .project-header {
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .project-title-section {
+        width: 100%;
     }
     
     .project-actions {

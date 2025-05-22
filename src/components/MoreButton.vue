@@ -191,7 +191,7 @@ button:hover {
   background: #fafafa;
 }
 
-.details >>> pre {
+.details :deep(pre) {
   overflow-x: auto;
   padding: 8px;
   background: #f5f5f5;
