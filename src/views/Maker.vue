@@ -2,7 +2,20 @@
     import ImageModal from '/src/components/ImageModal.vue';
     import MoreButton from '/src/components/MoreButton.vue';
     import { ref } from 'vue';
-    import { marked } from 'marked';
+    import MarkdownIt from 'markdown-it';
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/github.css';
+
+    const md = new MarkdownIt({
+        highlight: function (str, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+                try {
+                    return hljs.highlight(str, { language: lang }).value;
+                } catch (__) {}
+            }
+            return '';
+        }
+    });
 
     const isArticleExpanded = ref(false);
     const toggleArticle = () => {
@@ -11,7 +24,7 @@
 
     // Добавляем обработчик Markdown
     const renderMarkdown = (text) => {
-        return marked(text || '');
+        return md.render(text || '');
     };
 </script>
 
@@ -157,7 +170,7 @@
                     <div class="thanks-section">
                         <h3>🙏 Благодарности</h3>
                         <p>Спасибо Джону Коллинсу за идею и Станиславу Чавкину за тестирование этой инструкции.</p>
-                        <a href="https://makezine.com/projects/worlds-best-paper-airplane/">World’s Best Paper Airplane</a>
+                        <a href="https://makezine.com/projects/worlds-best-paper-airplane/">World's Best Paper Airplane</a>
                     </div>
                 </div>
             </article>

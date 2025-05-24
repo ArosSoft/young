@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { auth, db, ref as dbRef, push, onValue, remove, update } from '../firebase';
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
+import { getStorage } from 'firebase/storage';
 
 const IMGBB_API_KEY = 'b360c6df64de404cbb27ca4079327252'; // Получите бесплатный ключ на https://api.imgbb.com/
 const IMGBB_API_KEY_IO = 'chv_IC_8dedbdbc5a2c5f22892ca966d81326dd2534f84f9e9ca168a28ea4afee9b440c410a9f6b63221519b4b4870b173756f18bf04833e9f09b865d6d56819461dba0';
@@ -39,29 +40,73 @@ const projectForm = ref({
 const gradeOptions = ["IT", "РОБО", "БИО", "ХАЙТЕК", "НАНО", "АЭРО", "ГЕО", "МЕДИА", "НЕТ" ]; // Список доступных квантумов
 
 const projects = ref([]);
+const allProjects = ref([]); // Добавляем новую переменную для хранения всех проектов
 const user = ref(null);
 const isAdmin = ref(false);
+const storage = getStorage();
 const imagePreview = ref(null);
 const additionalImagePreviews = ref([]);
 const isLoading = ref(false);
 const expandedProjects = ref(new Set()); // Добавляем состояние для отслеживания развернутых проектов
 
+// Обновляем вычисляемые свойства для счетчиков
+const projectCounts = computed(() => {
+    const total = allProjects.value.length;
+    const pending = allProjects.value.filter(project => !project.approved).length;
+    const approved = total - pending;
+    return { total, pending, approved };
+});
+
+// Функция для случайного перемешивания массива (алгоритм Фишера-Йейтса)
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
+
 onMounted(() => {
     auth.onAuthStateChanged(async (authUser) => {
         user.value = authUser;
-        isAdmin.value = authUser?.email === 'admin@example.com';
+
+        if (authUser) {
+            isAdmin.value = authUser.email === 'admin@example.com';
+        } else {
+            isAdmin.value = false;
+        }
     });
 
     const projectsRef = dbRef(db, 'projects');
     onValue(projectsRef, (snapshot) => {
         const data = snapshot.val();
-        projects.value = data ? Object.entries(data).map(([id, project]) => ({
-            id,
-            ...project
-        })).sort((a, b) => {
-            if (a.approved === b.approved) return b.timestamp - a.timestamp;
-            return a.approved ? -1 : 1;
-        }) : [];
+        if (data) {
+            // Преобразуем данные в массив и сохраняем все проекты
+            allProjects.value = Object.entries(data).map(([id, project]) => ({
+                id,
+                ...project
+            }));
+
+            // Разделяем проекты на две группы: на модерации и одобренные
+            let pendingProjects = allProjects.value.filter(project => !project.approved);
+            let approvedProjects = allProjects.value.filter(project => project.approved);
+
+            // Перемешиваем одобренные проекты
+            approvedProjects = shuffleArray(approvedProjects);
+
+            // Если пользователь админ, показываем все проекты
+            // Иначе показываем только одобренные
+            if (isAdmin.value) {
+                // Для админа показываем сначала проекты на модерации, затем одобренные
+                projects.value = [...pendingProjects, ...approvedProjects];
+            } else {
+                // Для обычных пользователей показываем только одобренные
+                projects.value = approvedProjects;
+            }
+        } else {
+            allProjects.value = [];
+            projects.value = [];
+        }
     });
 });
 
@@ -272,6 +317,21 @@ const toggleProject = (projectId) => {
 <template>
     <div class="projects-section">
         <h1>Детские проекты</h1>
+
+        <div class="project-stats" v-if="allProjects.length > 0">
+            <div class="stat-item">
+                <span class="stat-label">Всего проектов:</span>
+                <span class="stat-value">{{ projectCounts.total }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">На модерации:</span>
+                <span class="stat-value pending">{{ projectCounts.pending }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Одобрено:</span>
+                <span class="stat-value approved">{{ projectCounts.approved }}</span>
+            </div>
+        </div>
 
         <div v-if="user" class="form-toggle">
             <button @click="toggleForm" class="toggle-button">
@@ -770,5 +830,161 @@ button:disabled {
         width: 100%;
         justify-content: flex-end;
     }
+}
+
+.project-stats {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.stat-value {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
+.moderation-notice {
+    color: #e67e22;
+    font-size: 0.9em;
+    margin-top: 15px;
+    font-style: italic;
+    text-align: center;
+}
+
+.no-projects {
+    text-align: center;
+    padding: 40px;
+    color: #7f8c8d;
+    font-size: 1.1em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px dashed #ddd;
+}
+
+.toggle-project-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+    color: #666;
+    cursor: pointer;
+    opacity: 0.1;
+    transition: opacity 0.2s;
+}
+
+.toggle-project-btn:hover {
+    opacity: 0.3;
+    background: none;
+}
+
+.project-title-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    flex: 1;
+}
+
+.project-title-section:hover {
+    opacity: 0.8;
+}
+
+.project-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.project-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-header h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .project-title-section {
+        width: 100%;
+    }
+    
+    .project-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+.project-stats {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.stat-value {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
+.moderation-hint {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+    margin-left: 8px;
+}
+
+.stat-value.pending {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.stat-value.approved {
+    color: #27ae60;
 }
 </style>

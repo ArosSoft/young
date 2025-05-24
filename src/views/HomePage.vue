@@ -14,6 +14,18 @@
         </div>
       </router-link>
       
+      <router-link to="./makeProject" class="block-link">
+        <div class="block">
+          <div class="image-container">
+            <img src="./logo/proj.jfif" alt="Детские проекты" />
+          </div>
+          <div class="text-container">
+            <h2>Детские проекты</h2>
+            <p>Проекты молодых изобретателей. Делитесь своими идеями и находите единомышленников!</p>
+          </div>
+        </div>
+      </router-link>
+      
       <router-link to="./welcome" class="block-link">
         <div class="block">
           <div class="image-container">
