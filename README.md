@@ -1,29 +1,73 @@
-# VueJS-with-Vite
+# Идеи молодежи — сайт на Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite.
+[![Deploy to GitHub Pages](https://github.com/arossoft/young/actions/workflows/deploy.yml/badge.svg)](https://github.com/arossoft/young/actions/workflows/deploy.yml)
 
-## Recommended IDE Setup
+Проект — это витрина и площадка для молодежных инициатив: идеи, нейро-арт, граффити, волонтерство, мейкерство и детские проекты. Сайт позволяет изучать разделы, вдохновляться примерами и авторизоваться для персонализированного опыта.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Разделы сайта
 
-## Customize configuration
+- **Домой**: навигация по ключевым разделам и краткие описания.
+- **О нас** (`/about`): информация о миссии и команде.
+- **Идеи молодежи** (`/welcome`): сборник идей и обсуждений.
+- **Нейро-Арт** (`/neuroart`): примеры работ, созданных с помощью нейросетей.
+- **Граффити** (`/graffiti`): уличное искусство и самовыражение.
+- **Волонтёрство** (`/volonter`): как присоединиться и помогать.
+- **Мэйкерство** (`/maker`): DIY-подход, изобретения и творчество.
+- **Сделай проект** (`/makeProject`): страница для размещения/описания проектов.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+В шапке доступна **авторизация** (Google и email/пароль) через Firebase.
 
-## Project Setup
+## Технологии
 
+- **Vue 3**, **Vite**, **Vue Router**
+- **Firebase** (аутентификация)
+- Дополнительно: `axios`, `markdown-it`, `highlight.js`
+
+## Требования
+
+- Node.js 18+ (рекомендуется LTS)
+- npm (идет вместе с Node.js)
+
+## Демо (GitHub Pages)
+
+- Проект доступен по адресу: `https://arossoft.github.io/young/`
+
+[![Демо — открыть](https://img.shields.io/badge/%D0%94%D0%B5%D0%BC%D0%BE-%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8C-brightgreen?style=for-the-badge)](https://arossoft.github.io/young/)
+
+<a href="https://arossoft.github.io/young/" target="_blank"><img src="https://img.shields.io/badge/%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8C%20%D1%81%D0%B0%D0%B9%D1%82-%E2%9E%A1%EF%B8%8F-blue?style=for-the-badge" alt="Открыть сайт"></a>
+
+## Установка и запуск локально
+
+1. Установите зависимости:
 ```sh
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
+2. Запустите дев-сервер:
 ```sh
 npm run dev
 ```
+Vite выведет адрес в консоли. Сайт обслуживается с базовым префиксом `'/young/'`, поэтому адрес обычно будет вида `http://localhost:5173/young/`.
 
-### Compile and Minify for Production
+## Сборка и предпросмотр
 
+- Сборка прод-версии:
 ```sh
 npm run build
 ```
+- Локальный предпросмотр собранной версии:
+```sh
+npm run preview
+```
+(по умолчанию на `http://localhost:4173/young/`)
+
+## Деплой на GitHub Pages (опционально)
+
+Команда собирает проект и публикует содержимое `dist` в ветку `gh-pages`:
+```sh
+npm run deploy
+```
+
+## Примечания
+
+- Базовый путь сборки настроен как `'/young/'` (см. `vite.config.js`). Если вы деплоите в другой контекст/путь, обновите это значение.
+- Конфигурация Firebase находится в `src/firebase.js`. Для своего проекта замените параметры на собственные.
