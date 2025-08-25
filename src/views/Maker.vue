@@ -181,7 +181,6 @@
 </template>
 
 <script>
-    import { marked } from 'marked';
 
     export default {
         name: 'Podelki',
@@ -257,9 +256,6 @@
                     this.isLoading = false;
                 }
             },
-            renderMarkdown(text) {
-                return marked(text || '');
-            }
         },
         computed: {
             formattedResponse() {
