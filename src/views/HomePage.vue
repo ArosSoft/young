@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <div class="content-block">
+    <div v-if="!isReady" class="splash"></div>
+    <div v-else class="expand-container">
+      <div class="content-block">
       
       <router-link to="./about" class="block-link">
         <div class="block">
@@ -85,15 +87,53 @@
           </div>
         </div>
       </router-link>
+      </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const isReady = ref(false)
+
+onMounted(() => {
+  setTimeout(() => {
+    isReady.value = true
+  }, 2000)
+})
+</script>
+
 <style>
+.splash {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('@/assets/background.jpg') center/cover no-repeat, #000;
+  z-index: 9999;
+}
 .home {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.expand-container {
+  transform-origin: top center;
+  will-change: transform, opacity;
+  animation: expandDown 500ms ease-out both;
+}
+
+@keyframes expandDown {
+  from {
+    transform: scaleY(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
 h1 {
