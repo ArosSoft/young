@@ -1,115 +1,190 @@
-<template>
-  <div>
-    <!-- Изображение, которое можно кликнуть -->
-    <img
-      :src="imageSrc"
-      alt="Click to enlarge"
-      :style="{ width: imageWidth }"
-      class="clickable-image"
-      @click="openModal"
-    />
+<!-- /src/components/ImageModal.vue -->
+<script setup>
+import { ref, computed } from 'vue';
 
-    <!-- Модальное окно -->
-    <div v-if="isModalOpen" class="modal-overlay" @click="closeModal">
-      <div class="modal-content">
-        <img :src="imageSrc" alt="Full size" class="full-size-image" />
-        <button class="close-button" @click.stop="closeModal">×</button>
-      </div>
-    </div>
-  </div>
-</template>
+const props = defineProps({
+    imageSrc: { type: String, required: true },
+    imageWidth: { type: String, default: '150px' }
+});
 
-<script>
-export default {
-  props: {
-    imageSrc: {
-      type: String,
-      required: true,
-    },
-    imageWidth: {
-      type: String,
-      default: "200px",
-    },
-  },
-  data() {
-    return {
-      isModalOpen: false,
-    };
-  },
-  methods: {
-    openModal() {
-      this.isModalOpen = true;
-      document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
-    },
-    closeModal() {
-      this.isModalOpen = false;
-      document.body.style.overflow = ''; // Восстанавливаем скролл страницы
-    },
-  },
+const isModalOpen = ref(false);
+
+// Определяем, видео ли это, по расширению или параметру URL
+const isVideo = computed(() => {
+    const src = props.imageSrc.toLowerCase();
+    const videoExts = ['.mp4', '.webm', '.ogg', '.mov'];
+    const hasVideoParam = src.includes('transcode=true') || src.includes('video');
+    return videoExts.some(ext => src.endsWith(ext)) || hasVideoParam;
+});
+
+const openModal = () => isModalOpen.value = true;
+const closeModal = () => isModalOpen.value = false;
+
+// Закрытие модального окна по ESC
+const onKeydown = (e) => {
+    if (e.key === 'Escape') closeModal();
 };
 </script>
 
+<template>
+    <div class="modal-wrapper">
+        <!-- Превью: изображение или видео -->
+        <div 
+            class="media-preview" 
+            :style="{ width: imageWidth }"
+            @click="openModal"
+        >
+            <img 
+                v-if="!isVideo" 
+                :src="imageSrc" 
+                alt="Preview" 
+                class="media-content"
+                loading="lazy"
+            />
+            <video 
+                v-else 
+                :src="imageSrc" 
+                class="media-content"
+                muted 
+                loop 
+                playsinline
+                preload="metadata"
+            />
+            <!-- Иконка для видео -->
+            <span v-if="isVideo" class="video-badge">▶</span>
+        </div>
+
+        <!-- Модальное окно (полный размер) -->
+        <Teleport to="body">
+            <Transition name="fade">
+                <div v-if="isModalOpen" class="modal-overlay" @click="closeModal" @keydown="onKeydown" tabindex="-1">
+                    <div class="modal-content" @click.stop>
+                        <button class="modal-close" @click="closeModal" aria-label="Закрыть">×</button>
+                        
+                        <img 
+                            v-if="!isVideo" 
+                            :src="imageSrc" 
+                            alt="Full size" 
+                            class="modal-media"
+                        />
+                        <video 
+                            v-else 
+                            :src="imageSrc" 
+                            class="modal-media"
+                            controls 
+                            autoplay
+                        />
+                    </div>
+                </div>
+            </Transition>
+        </Teleport>
+    </div>
+</template>
+
 <style scoped>
-.clickable-image {
-  cursor: pointer;
-  height: auto;
-  transition: transform 0.2s;
+.modal-wrapper {
+    display: flex;
+    justify-content: center;
 }
 
-.clickable-image:hover {
-  transform: scale(1.03);
+.media-preview {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+    cursor: pointer;
 }
 
+.media-preview:hover {
+    transform: scale(1.03);
+}
+
+.media-content {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+    pointer-events: none; /* Чтобы клик по видео проходил на контейнер */
+}
+
+.video-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Модальное окно */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    outline: none;
 }
 
 .modal-content {
-  position: relative;
-  max-width: 95vw;
-  max-height: 95vh;
-  margin: 20px;
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
-.full-size-image {
-  max-width: 95vw;
-  max-height: 95vh;
-  object-fit: contain;
-  border-radius: 4px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+.modal-media {
+    max-width: 100%;
+    max-height: 90vh;
+    display: block;
+    object-fit: contain;
 }
 
-.close-button {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #fff;
-  color: #000;
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s;
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
-.close-button:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.1);
+.modal-close:hover {
+    background: rgba(0,0,0,0.9);
+}
+
+/* Анимации */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.25s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>

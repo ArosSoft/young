@@ -51,7 +51,70 @@ import { ref } from 'vue';
         </div>
 
         <div class="container">
+            <div class="single-video">
+    <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/2ea23dae-0f62-41cd-99fc-c47922c66b00/transcode=true,original=true/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%A0%D0%BE%D0%B1%D0%BE%D1%82.webm" imageWidth="150px" />
+</div>
             <!-- Одиночные изображения -->
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/75fd3b61-6ea5-41c2-ae0f-73ab8e8f2994/original=true,quality=90/untitled_Gemini%203.1%20Flash%20(Nano%20Banana%202)_2026-03-25_14-12-14.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/c0487cb4-4e95-49df-9ab7-bb2a148bade9/original=true,quality=90/untitled_Gemini%203.1%20Flash%20(Nano%20Banana%202)_2026-03-25_14-11-56.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/237f926c-a652-4f4e-9329-224ce1598981/original=true,quality=90/00023-2552854400.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/940b3846-f958-459f-b47f-992858192b4b/original=true,quality=90/00020-3004126595.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/0676e9d2-b213-4867-ae02-a74c0c602465/original=true,quality=90/00017-3808146595.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/81174410-7786-4053-9dbb-01325d502071/original=true,quality=90/00014-2651167528.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/12f5366a-4afb-4a00-aac5-adf06ce82786/original=true,quality=90/00009-1145125934.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/77de1dbe-613d-4656-a41c-f4092984d4f4/original=true,quality=90/00007-3610803608.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/fdec7d53-dbcb-495a-9a8d-ea226f144ae3/original=true,quality=90/00007-2165530337.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/f70a88f3-9f2e-4e58-86a7-58af29ae889c/original=true,quality=90/00007-33340855.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/fcc05886-89cb-48dc-a17e-49043ab40a8a/original=true,quality=90/00006-1172130624.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/2a5c6aaf-cffd-44bf-be68-e32c6dfe19f1/original=true,quality=90/00005-2248087301.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/52d65088-03cd-4e79-ba61-2a35e69fa503/original=true,quality=90/00003-2956790238.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/37140845-b12b-4dc0-9c67-03781d862c36/original=true,quality=90/00003-31893503.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/4b48d04d-ec68-45ba-8a32-f1ae36c8ce26/original=true,quality=90/00003-1674934288.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/56d091e0-86d6-4fd7-bbf9-4415a59cae93/original=true,quality=90/00001-1254439026.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/5f3318f8-26dd-4464-bff6-98724d51271c/original=true,quality=90/00000-1925106654.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/65ad86f0-0b08-4136-a77d-36e731e68a2c/original=true,quality=90/image%20(4).jpeg" imageWidth="150px" />
+    </div> 
+            <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/47d69051-98cd-4a61-bb3d-c1d9f07373ca/original=true,quality=90/untitled_Gemini%203.1%20Flash%20(Nano%20Banana%202)_2026-04-08_14-01-43.jpeg" imageWidth="150px" />
+    </div>
+    <div class="single-image">
+        <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/c98f37fd-a6ed-4b25-a0a7-99ded61410b4/original=true,quality=90/untitled_Gemini%203.1%20Flash%20(Nano%20Banana%202)_2026-04-08_13-19-56.jpeg" imageWidth="150px" />
+    </div>
             <div class="single-image">
                 <ImageModal imageSrc="https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/94f45c4a-cc69-4041-86af-90a7bf287110/original=true,quality=90/image%20(14).jpeg" imageWidth="150px" />
             </div>
