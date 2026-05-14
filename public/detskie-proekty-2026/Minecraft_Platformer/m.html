@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft platformer | Паркур-платформер в Scratch</title>
+  <style>
+    :root {
+      --bg: #0f0f13;
+      --text: #e6e6e6;
+      --accent: #ff4d4d;
+      --secondary: #4d94ff;
+      --card: #1a1a24;
+      --lava: #ff6b35;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--card);
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, #2a1520 0%, var(--bg) 70%);
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+    .hero p { max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      padding: 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+    .card h3 { color: var(--secondary); margin-bottom: 0.5rem; }
+    .howto { padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+    .howto h2 { text-align: center; margin-bottom: 2rem; }
+    .step { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+    .step-num {
+      background: var(--accent);
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .quiz-info {
+      background: linear-gradient(135deg, #1a202c, #2d1b1b);
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .quiz-info h2 { color: var(--lava); }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #333;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+    .iframe-wrapper {
+      max-width: 485px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .scratch-embed {
+      width: 100%; 
+      height: 402px;
+      border: 2px solid var(--secondary);
+      border-radius: 8px;
+      display: block;
+    }
+    .fs-controls {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .fs-btn, .open-btn {
+      background: var(--secondary);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .fs-btn:hover, .open-btn:hover { filter: brightness(1.1); }
+    .fs-btn:active, .open-btn:active { transform: scale(0.98); }
+    .hint {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🥟 Minecraft platformer</div>
+    <a href="https://scratch.mit.edu/projects/1269467595" target="_blank" class="btn">🔗 Открыть на Scratch</a>
+  </header>
+
+  <section class="hero">
+    <h1>Прыгай. Не падай. Думай.</h1>
+    <p>Проект сделан Фроловым Максимом,<br>Папановым Петром,<br>Дубровым Максимом.<br>Платформер на Scratch, где Деш преодолевает паркур, а после каждого уровня отвечает на вопросы. Проверь реакцию и эрудицию!</p>
+    <a href="#play" class="btn" style="font-size:1.1rem; padding:0.8rem 1.5rem;">▶ Играть сейчас</a>
+  </section>
+
+  <section class="features">
+    <div class="card"><h3>🏃‍♂️ Паркур-механика</h3><p>Точное управление, платформы разной высоты и ловушки.</p></div>
+    <div class="card"><h3>🌋 Лава внизу</h3><p>Один промах — и Деш падает в раскалённую лаву. Рестарт мгновенный.</p></div>
+    <div class="card"><h3>📚 Викторины после тура</h3><p>Пройди этап → ответь на 3 вопроса → открой следующий уровень.</p></div>
+    <div class="card"><h3>🎨 Стиль и атмосфера</h3><p>Пиксельные спрайты, анимации, звуковые эффекты и плавные переходы.</p></div>
+  </section>
+
+  <section class="howto">
+    <h2>Как играть</h2>
+    <div class="step"><div class="step-num">1</div><div><strong>Старт</strong><br>Нажми зелёный флаг. Используй WASD для движения и пробел для прыжка.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Паркур</strong><br>Добирайся до флага, избегая шипов, движущихся платформ и пустоты.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Викторина</strong><br>После финиша появится тест. Правильные ответы открывают следующий тур.</div></div>
+  </section>
+
+  <section class="quiz-info">
+    <h2>🧠 Викторина — твой пропуск дальше</h2>
+    <p>Вопросы генерируются из списка. За каждый правильный ответ переход на следующий уровень. При ошибке можно попробовать снова, но ты потеряешь сердце.</p>
+  </section>
+
+  <section id="play" style="padding: 2rem 0;">
+    <div class="iframe-wrapper">
+      <h2>🎮 Демонстрация</h2>
+      <iframe 
+        id="scratch-frame"
+        src="https://scratch.mit.edu/projects/1269467595/embed" 
+        allowtransparency="true" 
+        width="485" 
+        height="402" 
+        frameborder="0" 
+        scrolling="no" 
+        allowfullscreen
+        allow="fullscreen"
+      ></iframe>
+      
+      <div class="fs-controls">
+        <button id="fullscreen-btn" class="fs-btn">⛶ На весь экран</button>
+        <a href="https://scratch.mit.edu/projects/1269467595" target="_blank" class="open-btn">🔗 Открыть в Scratch</a>
+      </div>
+      
+      <p class="hint">
+        💡 Если кнопка «На весь экран» не сработала — нажмите «Открыть в Scratch». 
+        Там есть встроенная кнопка полноэкранного режима в правом нижнем углу плеера.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Pelmeni and stive | Сделано с ❤️ и блоками Scratch</p>
+  </footer>
+
+  <script>
+    const iframe = document.getElementById('scratch-frame');
+    const btn = document.getElementById('fullscreen-btn');
+
+    function toggleFullscreen() {
+      // Проверяем поддержку Fullscreen API
+      if (!iframe) return;
+      
+      const isFullscreen = document.fullscreenElement || 
+                          document.webkitFullscreenElement || 
+                          document.mozFullScreenElement || 
+                          document.msFullscreenElement;
+
+      if (!isFullscreen) {
+        // Пытаемся развернуть iframe
+        if (iframe.requestFullscreen) {
+          iframe.requestFullscreen().catch(err => fallbackOpen());
+        } else if (iframe.webkitRequestFullscreen) {
+          iframe.webkitRequestFullscreen();
+        } else if (iframe.mozRequestFullScreen) {
+          iframe.mozRequestFullScreen();
+        } else if (iframe.msRequestFullscreen) {
+          iframe.msRequestFullscreen();
+        } else {
+          // Если API не поддерживается — открываем в новой вкладке
+          fallbackOpen();
+        }
+      } else {
+        // Выход из полноэкранного режима
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+    }
+
+    // ✅ Надёжный фолбэк: открываем проект в новой вкладке
+    function fallbackOpen() {
+      window.open('https://scratch.mit.edu/projects/1269467595', '_blank');
+    }
+
+    function updateButton() {
+      const isFullscreen = document.fullscreenElement || 
+                          document.webkitFullscreenElement || 
+                          document.mozFullScreenElement || 
+                          document.msFullscreenElement;
+      btn.textContent = isFullscreen ? '⛶ Выйти' : '⛶ На весь экран';
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleFullscreen();
+    });
+
+    // Отслеживаем изменения полноэкранного режима
+    ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'msfullscreenchange']
+      .forEach(evt => document.addEventListener(evt, updateButton));
+  </script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ДЕМОНОБОЙ | КЛИКЕР ПРО ВЫЖИВАНИЕ В КОСМОСЕ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', 'Impact', 'Arial Black', monospace, sans-serif;
+            background-color: #010101;
+            color: #f0e6a0;
+            overflow-x: hidden;
+        }
+
+        /* Фон скрин.png — главный задник */
+        .bg-epic {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('скрин.png') no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.45) contrast(1.25) saturate(1.15);
+            z-index: -2;
+        }
+
+        /* Эффект «старого монитора» для стиля */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.65) 0px, rgba(0,0,0,0.4) 2px, transparent 3px, transparent 6px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(3px);
+        }
+
+        /* Хидер в стиле "падонкафф" но без мата */
+        .header {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 60px;
+            padding: 20px 15px;
+            margin-bottom: 30px;
+            border: 3px solid #ff884d;
+            box-shadow: 0 0 25px rgba(255, 100, 0, 0.5);
+            transform: rotate(-0.3deg);
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 5px 5px 0 #5a1e00;
+            word-break: break-word;
+        }
+
+        .header p {
+            font-size: 1.7rem;
+            background: #221c12;
+            display: inline-block;
+            padding: 5px 25px;
+            border-radius: 50px;
+            color: #ffbb77;
+            font-weight: bold;
+        }
+
+        /* два блока: скретч-игра и инфо-кликер */
+        .double-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        /* виджет Scratch с проектом */
+        .scratch-box {
+            flex: 1.6;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 48px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #ffaa33;
+            backdrop-filter: blur(6px);
+        }
+
+        .scratch-box h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ffbc6e;
+        }
+
+        .scratch-frame {
+            background: #2c2c2c;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px black;
+            margin: 15px 0;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 485px;
+            height: 402px;
+            border: none;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .fullscreen-link {
+            display: inline-block;
+            margin-top: 12px;
+            background: #ff8822;
+            color: #1f1a0a;
+            padding: 8px 20px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: 0.1s linear;
+            box-shadow: 0 5px 0 #914d00;
+        }
+
+        .fullscreen-link:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #914d00;
+        }
+
+        /* панель кликера и экономики (простенькая демка) */
+        .clicker-panel {
+            flex: 1.2;
+            min-width: 260px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 48px;
+            border: 2px solid #e08e2e;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .demon-zone {
+            background: #301a0e;
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 4px solid #ff7744;
+            transition: 0.04s linear;
+        }
+        .demon-zone:active {
+            transform: scale(0.96);
+        }
+        .demon-face {
+            font-size: 100px;
+            filter: drop-shadow(3px 3px 0 #4a1500);
+        }
+
+        .stats {
+            font-size: 1.5rem;
+            background: #1e1b14;
+            margin: 12px 0;
+            padding: 8px;
+            border-radius: 60px;
+        }
+
+        .click-main-btn {
+            background: radial-gradient(circle at 30% 20%, #ff8c42, #aa4700);
+            border: none;
+            font-size: 1.7rem;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 60px;
+            width: 90%;
+            color: #ffffcc;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .upgrade-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .upgrade-item {
+            background: #2b2219;
+            margin: 12px 0;
+            padding: 8px 12px;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .upgrade-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .buy-upgrade {
+            background: #4d3a22;
+            border: none;
+            color: #ffdd99;
+            padding: 5px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .buy-upgrade:active {
+            transform: scale(0.95);
+        }
+        .disabled-upg {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* лор в стиле падонкафф без мата */
+        .lore-story {
+            margin-top: 45px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50px;
+            padding: 25px;
+            border-left: 8px solid #e05a1a;
+            border-right: 8px solid #a03c0a;
+            text-align: center;
+        }
+        .lore-story h3 {
+            font-size: 2rem;
+            color: #ffa559;
+        }
+        .bad-but-clean {
+            background: #2e241a;
+            display: inline-block;
+            padding: 5px 18px;
+            border-radius: 60px;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 0.8rem;
+            color: #bbaa77;
+            padding: 12px;
+        }
+        @media (max-width: 900px) {
+            h1 { font-size: 2.3rem; }
+            .demon-face { font-size: 70px; }
+            .demon-zone { width: 140px; height: 140px; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-epic"></div>
+<div class="noise-overlay"></div>
+
+<div class="container">
+    <div class="header">
+        <h1>⚡ ДЕМОНОБОЙ ⚡<br>КОСМО-КЛИКЕР С ЭКОНОМИКОЙ</h1>
+        <p>ОБОКРОТИЛСЯ → ПОШЁЛ НА ОПАСНУЮ РАБОТУ → МОЧИТЬ ДЕМОНОВ</p>
+    </div>
+
+    <div class="double-block">
+        <!-- БЛОК SCRATCH - встроенный проект -->
+        <div class="scratch-box">
+            <h2>🎮 ИГРАТЬ В SCRATCH 🎮</h2>
+            <div class="scratch-frame">
+                <iframe src="https://scratch.mit.edu/projects/1291843805/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+            </div>
+            <a href="https://scratch.mit.edu/projects/1291843805" target="_blank" class="fullscreen-link">🔗 ОТКРЫТЬ В ПОЛНЫЙ ЭКРАН 🔗</a>
+            <p style="margin-top: 10px; font-size: 0.9rem;">💥 нажми на зеленый флаг и уничтожай орды демонов!</p>
+        </div>
+
+        <!-- КЛИКЕР-ДЕМКА (чтобы прочувствовать экономику и атмосферу) -->
+        <div class="clicker-panel">
+            <div class="demon-zone" id="demonClickZone">
+                <div class="demon-face">👾🔥</div>
+            </div>
+            <div class="stats">
+                💀 УНИЧТОЖЕНО: <span id="totalKills">0</span> 💀
+            </div>
+            <div class="stats">
+                  ер: <span id="totalMoney">0</span> 
+            </div>
+            <button class="click-main-btn" id="clickMainBtn">⚡ КЛИК — РАЗОТКРЫТЬ ДЕМОНА ⚡</button>
+            
+            <div class="upgrade-list">
+                <div style="font-weight: bold; margin: 10px 0 5px;">📦 УЛУЧШЕНИЯ ОТ КОНТОРЫ:</div>
+                <div id="upgradesContainer"></div>
+            </div>
+            <div style="font-size: 0.7rem; margin-top: 12px;">⭐ союзники помогают бить демонов автоматически</div>
+        </div>
+    </div>
+
+    <!-- СТИЛИЗОВАННЫЙ ЛОР (без ругательств, но в стиле падонков) -->
+    <div class="lore-story">
+        <h3>📜 ПРЕДЫСТОРИЯ: КАК ТЫ СТАЛ ГРОЗОЙ ДЕМОНОВ</h3>
+        <p><strong>«Жил-был работяга, совсем обокротился»</strong> — и решился на <strong>самую опасную работу в галактике</strong>. Корпорация «КОСМО-РЕЙД» отправила тебя на планету Демонион, где целый вид организмов, называющих себя <span style="color:#ff8866;">«демонами»</span>, угрожает человечеству. Твоя задача — истребить их всех, улучшая себя и своих союзников.</p>
+        <p>🧬 Ты проходишь через биомодификации, нанимаешь отбивных наёмников, ставишь плазменные турели. Чем больше демонов убито — тем больше ресурсов, чтобы стать сильнее. Но потом ты узнаёшь шокирующую правду... (спойлер: демоны тоже хотят жить, но работа есть работа).</p>
+        <div class="bad-but-clean">
+            🎯 ПРЕВЕД, МЕДВЕД! КЛИКАЙ ПО ДЕМОНУ, ПРОКАЧИВАЙ ЭКОНОМИКУ, ВЫНОСИ ВРАГОВ В SCRATCH И В ЭТОМ ДЕМО-КЛИКЕРЕ 🎯
+        </div>
+        <p style="margin-top: 14px;">🚀 <strong>ПОЛНАЯ ВЕРСИЯ ЖДЁТ ТЕБЯ НА SCRATCH</strong> — переходи по ссылке и запускай проект на полном экране. Уничтожай демонов, покупай апгрейды, становись легендой!</p>
+    </div>
+    <footer>
+        🪐 проект создан авторами Сергей К и Пётр М  для истребителей демонов · все события вымышлены, демоны не пострадали (пострадали) · фон — скрин.png 🪐
+    </footer>
+</div>
+
+<script>
+    // ========== МИНИ-КЛИКЕР ДЛЯ ПРИМЕРА (экономика и падонкаффский вайб) ==========
+    let kills = 0;
+    let cash = 0;
+    let clickDamage = 1;
+    let autoDPS = 0;
+
+    // список улучшений (без мата, но с колоритом)
+    const upgradesData = [
+        { id: "dmg1", name: "ракетница", desc: "+1 к урону", price: 12, type: "click", val: 1, bought: false },
+        { id: "dmg2", name: "🔫 пацан с узи", desc: "+3 урона", price: 45, type: "click", val: 3, bought: false },
+        { id: "auto1", name: "🤖 дрон", desc: "1 демон/сек", price: 55, type: "dps", val: 1, bought: false },
+        { id: "auto2", name: "👊 самурай", desc: "+3 демона/сек", price: 165, type: "dps", val: 3, bought: false },
+        { id: "auto3", name: "💣 ТЯЖЁЛЫЙ МЕХ", desc: "+7 демонов/сек", price: 420, type: "dps", val: 7, bought: false }
+    ];
+
+    const killsSpan = document.getElementById("totalKills");
+    const moneySpan = document.getElementById("totalMoney");
+    const upgradesDiv = document.getElementById("upgradesContainer");
+
+    function updateStats() {
+        killsSpan.innerText = kills;
+        moneySpan.innerText = Math.floor(cash);
+        renderUpgrades();
+    }
+
+    function addCash(amount) {
+        cash += amount;
+        updateStats();
+    }
+
+    function addKills(amt) {
+        kills += amt;
+        updateStats();
+        // за каждую убитую демонину даём бабло
+        let earned = amt * 2;
+        addCash(earned);
+    }
+
+    // функция клика
+    function performClick() {
+        let dmg = clickDamage;
+        addKills(dmg);
+        // визуальный фидбек
+        const zone = document.getElementById("demonClickZone");
+        zone.style.transform = "scale(0.94)";
+        setTimeout(() => { zone.style.transform = ""; }, 80);
+        if (navigator.vibrate) navigator.vibrate(20);
+    }
+
+    // покупка улучшения
+    function buyUpgrade(index) {
+        let up = upgradesData[index];
+        if (up.bought) return;
+        if (cash >= up.price) {
+            cash -= up.price;
+            up.bought = true;
+            if (up.type === "click") {
+                clickDamage += up.val;
+            } else if (up.type === "dps") {
+                autoDPS += up.val;
+                // перезапускаем авто-интервал с новым dps
+                restartAutoDPS();
+            }
+            updateStats();
+            // всплывашка
+            let msg = document.createElement("div");
+            msg.innerText = `✅ УЛУЧШЕНИЕ КУПЛЕНО: ${up.name}! МОЩЬ РАСТЁТ!`;
+            msg.style.position = "fixed";
+            msg.style.bottom = "20px";
+            msg.style.left = "20px";
+            msg.style.background = "#2c2618";
+            msg.style.color = "#ffcc88";
+            msg.style.padding = "8px 16px";
+            msg.style.borderRadius = "40px";
+            msg.style.border = "1px solid gold";
+            msg.style.zIndex = "999";
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 1600);
+        } else {
+            let msg = document.createElement("div");
+            msg.innerText = `😭 НЕ ХВАТАЕТ КОСМО-КРЕДИТОВ ДЛЯ ${up.name} ... ИДИ КЛИКАЙ!`;
+            msg.style.cssText = "position:fixed; bottom:20px; right:20px; background:#3a1f12; color:#ffaa77; border:1px solid red; border-radius:30px; padding:6px 15px; z-index:999;";
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 1200);
+        }
+    }
+
+    function renderUpgrades() {
+        upgradesDiv.innerHTML = "";
+        upgradesData.forEach((up, idx) => {
+            let div = document.createElement("div");
+            div.className = "upgrade-item";
+            let statusText = up.bought ? "✅ КУПЛЕНО" : `💰 ЦЕНА: ${up.price}`;
+            div.innerHTML = `
+                <div style="flex:2">
+                    <div class="upgrade-name">${up.name}</div>
+                    <div style="font-size:0.75rem;">${up.desc}</div>
+                    <div>${statusText}</div>
+                </div>
+                <button class="buy-upgrade" data-idx="${idx}" ${up.bought ? 'disabled style="opacity:0.5;"' : ''}>💲 ВЗЯТЬ</button>
+            `;
+            upgradesDiv.appendChild(div);
+        });
+        document.querySelectorAll('.buy-upgrade').forEach(btn => {
+            if (btn.disabled) return;
+            btn.addEventListener('click', (e) => {
+                let idx = parseInt(btn.getAttribute('data-idx'));
+                if (!isNaN(idx)) buyUpgrade(idx);
+            });
+        });
+    }
+
+    let autoInterval = null;
+    function restartAutoDPS() {
+        if (autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(() => {
+            if (autoDPS > 0) {
+                addKills(autoDPS);
+                // небольшой визуальный эффект для демонстрации авто-помощи
+                const zone = document.getElementById("demonClickZone");
+                zone.style.boxShadow = "0 0 0 2px #ffaa55";
+                setTimeout(() => { zone.style.boxShadow = ""; }, 150);
+            }
+        }, 1000);
+    }
+
+    // Привязка событий
+    document.getElementById("clickMainBtn").addEventListener("click", performClick);
+    document.getElementById("demonClickZone").addEventListener("click", performClick);
+
+    function initGame() {
+        renderUpgrades();
+        restartAutoDPS();
+        updateStats();
+    }
+    initGame();
+</script>
+</body>
+</html>

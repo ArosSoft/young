@@ -16,6 +16,18 @@
         </div>
       </router-link>
       
+      <router-link to="./children-projects-2026" class="block-link">
+        <div class="block">
+          <div class="image-container">
+            <img src="./logo/proj.jfif" alt="Детские проекты 2026" />
+          </div>
+          <div class="text-container">
+            <h2>Детские проекты 2026</h2>
+            <p>Scratch-проекты группы И 1.0: платформеры, аркады, кликеры и стратегии, созданные юными разработчиками.</p>
+          </div>
+        </div>
+      </router-link>
+
       <router-link to="./makeProject" class="block-link">
         <div class="block">
           <div class="image-container">
@@ -116,7 +128,7 @@ onMounted(() => {
 .home {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 10px;
 }
 
 .expand-container {

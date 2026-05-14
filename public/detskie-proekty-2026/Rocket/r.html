@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ракета — космическая аркада на Scratch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #03050b 0%, #0a0f1f 100%);
+            font-family: 'Segoe UI', 'Poppins', 'Orbitron', system-ui, -apple-system, 'Inter', 'Montserrat', sans-serif;
+            color: #eef5ff;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        /* космический фон с мерцанием */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                              radial-gradient(1px 1px at 80px 240px, #f8f3c0, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px, 150px 150px;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* хедер с ракетой */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .rocket-icon {
+            font-size: 4.2rem;
+            filter: drop-shadow(0 8px 20px rgba(0, 180, 255, 0.4));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            background: linear-gradient(135deg, #FFFFFF, #7bc5ff, #3b8aff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            margin: 0.5rem 0 0.2rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b0d4ff;
+            background: rgba(10, 25, 55, 0.7);
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        /* блок игры — карточка с iframe */
+        .game-section {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 3rem;
+            padding: 1.8rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(72, 187, 255, 0.4);
+            box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+            transition: all 0.2s;
+        }
+
+        .game-wrapper {
+            display: flex;
+            justify-content: center;
+            border-radius: 2rem;
+            overflow: hidden;
+            background: #00000022;
+            position: relative;
+        }
+
+        iframe {
+            border-radius: 1.5rem;
+            transition: transform 0.2s ease;
+            width: 100%;
+            max-width: 485px;
+            height: auto;
+            aspect-ratio: 485 / 402;
+            background: #0a0f1f;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .fullscreen-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .btn-full {
+            background: #1e2a47;
+            border: none;
+            color: #b9e2ff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+            font-family: inherit;
+            border: 1px solid #3f6792;
+        }
+
+        .btn-full:hover {
+            background: #2c3f66;
+            color: white;
+            border-color: #7ab3ff;
+            transform: scale(0.97);
+            box-shadow: 0 4px 12px rgba(0,160,255,0.3);
+        }
+
+        /* сетка правил и авторов */
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: rgba(8, 16, 32, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.6rem 2rem;
+            flex: 1;
+            min-width: 240px;
+            border: 1px solid rgba(80, 140, 210, 0.5);
+            transition: 0.2s;
+        }
+
+        .card h2 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #3c9eff;
+            padding-left: 1rem;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            font-size: 1.05rem;
+        }
+
+        .rule-symbol {
+            font-size: 1.3rem;
+            min-width: 28px;
+            display: inline-block;
+        }
+
+        .author-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255,255,245,0.05);
+            padding: 0.7rem 1rem;
+            border-radius: 2rem;
+            transition: 0.1s;
+        }
+
+        .author-avatar {
+            background: linear-gradient(145deg, #ffb347, #ff7e05);
+            width: 44px;
+            height: 44px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            box-shadow: 0 0 6px #ffb347;
+        }
+
+        .author-info {
+            font-weight: 500;
+        }
+        .author-role {
+            font-size: 0.75rem;
+            opacity: 0.75;
+            letter-spacing: 0.5px;
+        }
+
+        .project-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .scratch-link {
+            background: #2b3b5c;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            border: 1px solid #5c8bcb;
+        }
+
+        .scratch-link:hover {
+            background: #1f6fe6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(31, 111, 230, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(100, 150, 200, 0.3);
+            padding-top: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+            .card h2 {
+                font-size: 1.4rem;
+            }
+            .game-section {
+                padding: 1rem;
+            }
+        }
+
+        button {
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <div class="rocket-icon">🚀</div>
+        <h1>Ракета</h1>
+        <div class="tagline">⭐ космический раннер | управляй, уклоняйся!</div>
+    </div>
+
+    <!-- БЛОК ИГРЫ с поддержкой полного экрана -->
+    <div class="game-section">
+        <div class="game-wrapper" id="gameWrapper">
+            <iframe 
+                id="scratchEmbed"
+                src="https://scratch.mit.edu/projects/1298542077/embed" 
+                allowtransparency="true" 
+                width="485" 
+                height="402" 
+                frameborder="0" 
+                scrolling="no" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="fullscreen-btn">
+            <button class="btn-full" id="fullscreenBtn">
+                <span>🖥️</span> Запустить на весь экран
+            </button>
+        </div>
+    </div>
+
+    <!-- ИНФОРМАЦИЯ: ПРАВИЛА + АВТОРЫ -->
+    <div class="info-grid">
+        <!-- Правила игры -->
+        <div class="card">
+            <h2>📜 Правила игры</h2>
+            <ul class="rules-list">
+                <li><span class="rule-symbol">🚀</span> Управляй ракетой с помощью <strong>стрелок</strong> (вверх/влево/вправо).</li>
+                <li><span class="rule-symbol">💥</span> Избегай столкновений с астероидами.</li>
+                <li><span class="rule-symbol">✨</span> Собирай <strong>монетки</strong> для набора очков.</li>
+                <li><span class="rule-symbol">🏆</span> Цель: продержаться как можно дольше и набрать рекордное количество очков!</li>
+                <li><span class="rule-symbol">🎮</span> собери 10 монет и долети до Земли.</li>
+            </ul>
+        </div>
+
+        <!-- Авторы проекта -->
+        <div class="card">
+            <h2>👾 Авторы</h2>
+            <div class="author-block">
+                <div class="author">
+                    <div class="author-avatar">🎨</div>
+                    <div class="author-info">
+                        <strong>Космическая студия «Ракета»</strong><br>
+                        <span class="author-role">Game Design & графика</span>
+                    </div>
+                </div>
+                <div class="author">
+                    <div class="author-avatar">💻</div>
+                    <div class="author-info">
+                        <strong>Чирков Дмитрий</strong><br>
+                        <span class="author-role">код, логика, физика движения</span>
+                    </div>
+                </div>
+                <div class="author">
+                    <div class="author-avatar">🎵</div>
+                    <div class="author-info">
+                        <strong>Колосов Михаил</strong><br>
+                        <span class="author-role">звуки, анимация, дизайн уровней</span>
+                    </div>
+                </div>
+                <div class="author">
+                    <div class="author-avatar">🤖</div>
+                    <div class="author-info">
+                        <strong>Scratch-сообщество</strong><br>
+                        <span class="author-role">тестирование и идеи</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.8rem; background: #ffffff10; padding: 0.4rem 1rem; border-radius: 2rem;">
+                🧑‍🚀 Проект создан в 2026 году.
+            </div>
+        </div>
+    </div>
+
+    <!-- Прямая ссылка на проект Scratch -->
+    <div class="project-link">
+        <a href="https://scratch.mit.edu/projects/1298542077" target="_blank" rel="noopener noreferrer" class="scratch-link">
+            🧩 Открыть оригинальный проект на Scratch →
+        </a>
+    </div>
+
+    <footer>
+        <p>✨ Игра "Ракета" — динамичная аркада на Scratch. Жми на весь экран для полного погружения! ✨<br>
+        © 2026 Космическая мастерская. Вселенная ждёт твой рекорд.</p>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const iframe = document.getElementById('scratchEmbed');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        // Функция для запроса полноэкранного режима у iframe или его родителя (но iframe должен поддерживать allowfullscreen)
+        // Встраивание имеет атрибут allowfullscreen, но для надёжности можно попробовать сделать полноэкранным сам контейнер или iframe.
+        // Используем стандартный Fullscreen API для элемента iframe.
+        function launchFullscreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen().catch(err => {
+                    console.warn(`Ошибка fullscreen: ${err.message}`);
+                    fallbackFullscreen();
+                });
+            } else if (element.webkitRequestFullscreen) { /* Safari */
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            } else {
+                fallbackFullscreen();
+            }
+        }
+
+        // Если полноэкранный режим для iframe недоступен — предложим открыть ссылку Scratch в новой вкладке (или дадим подсказку)
+        function fallbackFullscreen() {
+            alert("Чтобы запустить игру на весь экран, нажмите правой кнопкой на игру → 'Полноэкранный режим' (если поддерживается браузером), либо откройте проект по ссылке Scratch и там используйте кнопку полноэкранного режима.\n\nСсылка: https://scratch.mit.edu/projects/1298542077");
+        }
+
+        // Основной обработчик: пробуем сделать полноэкранным iframe
+        fullscreenBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (iframe) {
+                // Убедимся, что iframe загружен и доступен
+                launchFullscreen(iframe);
+            } else {
+                fallbackFullscreen();
+            }
+        });
+
+        // Дополнительно: слушаем изменения fullscreen, чтобы при выходе не сломать стили
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                // если вышли из полноэкранного режима, можно вернуть любые стили если надо
+            }
+        });
+
+        // Для мобильных устройств и дополнительного удобства — также если кликнуть по игре двойным тапом не мешает
+        if (iframe) {
+            iframe.addEventListener('dblclick', () => {
+                launchFullscreen(iframe);
+            });
+        }
+
+        // Улучшение: корректировка размеров iframe на маленьких экранах, чтобы не выпадал из сетки
+        function adjustIframeSize() {
+            if (!iframe) return;
+            const container = document.querySelector('.game-wrapper');
+            if (container) {
+                const containerWidth = container.clientWidth;
+                if (containerWidth < 500) {
+                    // масштабируем iframe сохраняя пропорции
+                    iframe.style.width = '100%';
+                    iframe.style.height = 'auto';
+                    // оригинальные размеры 485x402, соотношение ~0.829
+                } else {
+                    iframe.style.width = '485px';
+                    iframe.style.height = '402px';
+                }
+            }
+        }
+        window.addEventListener('resize', adjustIframeSize);
+        adjustIframeSize();
+    })();
+</script>
+
+<!-- Дополнительный интерактив: на случай если браузер блокирует fullscreen, показываем сообщение, но также поддерживаем стандарт -->
+</body>
+</html>

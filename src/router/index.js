@@ -5,8 +5,9 @@ import TheWelcome from '../components/TheWelcome.vue' // Компонент дл
 import Neuroart from '../views/Neuroart.vue' // Компонент для страницы "Нейро-арт"
 import Graffiti from '../views/Graffiti.vue' // Компонент для страницы "Граффити"
 import Volonter from '../views/Volonter.vue' 
-import Maker from '../views/Maker.vue' 
-import MakeProject from '../views/MakeProject.vue' 
+import Maker from '../views/Maker.vue'
+import MakeProject from '../views/MakeProject.vue'
+import ChildrenProjects2026 from '../views/ChildrenProjects2026.vue'
 
 // Создание маршрутизатора с определением маршрутов для каждого пути
 const router = createRouter({
@@ -51,6 +52,11 @@ const router = createRouter({
             path: '/makeProject', // Путь для страницы "Проекты"
             name: 'make', // Имя маршрута
             component: MakeProject // Компонент, который будет отображаться
+        },
+        {
+            path: '/children-projects-2026', // Путь для страницы "Детские проекты 2026"
+            name: 'children2026', // Имя маршрута
+            component: ChildrenProjects2026 // Компонент, который будет отображаться
         }
     ]
 })

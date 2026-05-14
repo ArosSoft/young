@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кванториум | Проекты И 1.0</title>
+    <style>
+        /* ===== Цветовая схема в стиле Scratch ===== */
+        :root {
+            --scratch-orange: #FFAB19;
+            --scratch-blue: #4C97FF;
+            --scratch-green: #0FBD8C;
+            --scratch-pink: #FF6680;
+            --scratch-purple: #A66CFF;
+            --scratch-yellow: #FFD500;
+            --bg-light: #F9F7FF;
+            --text-dark: #2D2B3A;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Balsamiq Sans', 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== Секция героя ===== */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Декоративные элементы фона */
+        .hero-section::after {
+            content: '🎮 🚀 🎨 🎯 🎲 🎪 🎭 🎪';
+            position: absolute;
+            top: 5%;
+            left: -10%;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: floatEmoji 20s linear infinite;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ===== Шапка (Header) с фоновым изображением ===== */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            position: relative;
+            z-index: 10;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Фоновое изображение для заголовка */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('дети2.jpg') center/cover no-repeat;
+            z-index: -2;
+        }
+
+        /* Тёмный слой для читаемости текста */
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: -1;
+        }
+
+        @keyframes floatEmoji {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50vw); }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 240px;
+            height: 240px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 4px solid var(--scratch-yellow);
+            animation: logoBounce 2s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes logoBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .title-container {
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            margin-top: 100px;
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: white;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            letter-spacing: 3px;
+            margin-bottom: 0.3rem;
+            animation: titlePop 1s ease-out;
+        }
+
+        @keyframes titlePop {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--scratch-yellow);
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* ===== Секция с проектами ===== */
+        .projects-section {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: white;
+            margin-bottom: 2.5rem;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===== Карточка проекта ===== */
+        .project-card {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--scratch-orange), var(--scratch-pink), var(--scratch-purple));
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .project-card:nth-child(1):hover { border-color: var(--scratch-green); }
+        .project-card:nth-child(2):hover { border-color: var(--scratch-orange); }
+        .project-card:nth-child(3):hover { border-color: var(--scratch-blue); }
+        .project-card:nth-child(4):hover { border-color: var(--scratch-pink); }
+
+        .project-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .project-authors {
+            background: #F0F0F0;
+            padding: 0.6rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .scratch-embed {
+            width: 100%;
+            height: 302px;
+            border-radius: 15px;
+            border: 3px solid #E0E0E0;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-scratch {
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-play {
+            background: var(--scratch-orange);
+            color: white;
+        }
+
+        .btn-scratch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* ===== Футер ===== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.2);
+            color: white;
+            margin-top: auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* ===== Адаптивность ===== */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .logo-container {
+                justify-content: center;
+            }
+
+            .logo-img {
+                width: 180px;
+                height: 180px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0.5rem;
+            }
+
+            .project-card {
+                padding: 1rem;
+            }
+
+            .scratch-embed {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: auto;
+                padding-bottom: 2rem;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .projects-section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* ===== Анимация появления карточек ===== */
+        .project-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <!-- Шапка с логотипом и названием -->
+        <header>
+            <div class="logo-container">
+                <div class="logo-img">
+                    <img src="Logo.png" alt="Кванториум логотип">
+                </div>
+            </div>
+            <div class="title-container">
+                <h1 class="main-title">Scratch проекты</h1>
+                <p class="subtitle">группы И 1.0</p>
+            </div>
+            <div style="width: 80px;"></div> <!-- Пустышка для центрирования -->
+        </header>
+
+        <!-- Секция с проектами -->
+        <section class="projects-section">
+            
+
+            <div class="projects-grid">
+                <!-- Проект 1: Minecraft Platformer -->
+                <div class="project-card">
+                    <div class="project-icon">🏃‍♂️</div>
+                    <h3 class="project-title">Minecraft Platformer</h3>
+                    <p class="project-description">Паркур-платформер, где Деш преодолевает препятствия и отвечает на вопросы после каждого уровня!</p>
+                    <div class="project-authors">
+                        👨‍💻 Авторы: Фролов Максим, Папанов Пётр, Дубров Максим
+                    </div>
+                    <iframe src="https://scratch.mit.edu/projects/1269467595/embed"
+                            class="scratch-embed"
+                            allowtransparency="true"
+                            frameborder="0"
+                            scrolling="no"
+                            allowfullscreen>
+                    </iframe>
+                    <div class="project-links">
+                        <a href="https://scratch.mit.edu/projects/1269467595"
+                           target="_blank"
+                           class="btn-scratch btn-play">
+                            🎮 Играть на Scratch
+                        </a>
+                        <a href="Minecraft_Platformer/m.html"
+                           class="btn-scratch"
+                           style="background: var(--scratch-green); color: white;">
+                            📄 Подробнее
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Проект 2: Демонобой (nagenial) -->
+                <div class="project-card">
+                    <div class="project-icon">👷</div>
+                    <h3 class="project-title">Nagenial</h3>
+                    <p class="project-description">Космический кликер про выживание! Уничтожай демонов, улучшай союзников и спасай галактику!</p>
+                    <div class="project-authors">
+                        👨‍💻 Авторы: Сергей К, Пётр М
+                    </div>
+                    <iframe src="https://scratch.mit.edu/projects/1291843805/embed"
+                            class="scratch-embed"
+                            allowtransparency="true"
+                            frameborder="0"
+                            scrolling="no"
+                            allowfullscreen>
+                    </iframe>
+                    <div class="project-links">
+                        <a href="https://scratch.mit.edu/projects/1291843805"
+                           target="_blank"
+                           class="btn-scratch btn-play">
+                            🎮 Играть на Scratch
+                        </a>
+                        <a href="nagenial/n.html"
+                           class="btn-scratch"
+                           style="background: var(--scratch-orange); color: white;">
+                            📄 Подробнее
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Проект 3: Ракета -->
+                <div class="project-card">
+                    <div class="project-icon">🚀</div>
+                    <h3 class="project-title">Ракета</h3>
+                    <p class="project-description">Космическая аркада! Управляй ракетой, уклоняйся от астероидов и собирай монетки.</p>
+                    <div class="project-authors">
+                        👨‍💻 Авторы: Чирков Дмитрий, Колосов Михаил
+                    </div>
+                    <iframe src="https://scratch.mit.edu/projects/1298542077/embed"
+                            class="scratch-embed"
+                            allowtransparency="true"
+                            frameborder="0"
+                            scrolling="no"
+                            allowfullscreen>
+                    </iframe>
+                    <div class="project-links">
+                        <a href="https://scratch.mit.edu/projects/1298542077"
+                           target="_blank"
+                           class="btn-scratch btn-play">
+                            🎮 Играть на Scratch
+                        </a>
+                        <a href="Rocket/r.html"
+                           class="btn-scratch"
+                           style="background: var(--scratch-blue); color: white;">
+                            📄 Подробнее
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Проект 4: Защита башни спецназа -->
+                <div class="project-card">
+                    <div class="project-icon">🛡️</div>
+                    <h3 class="project-title">Защита башни спецназа</h3>
+                    <p class="project-description">Стратегия в стиле детских рисунков. Защищай башню от волн террористов!</p>
+                    <div class="project-authors">
+                        👨‍💻 Авторы: Команда спецназа
+                    </div>
+                    <iframe src="https://scratch.mit.edu/projects/1297244057/embed"
+                            class="scratch-embed"
+                            allowtransparency="true"
+                            frameborder="0"
+                            scrolling="no"
+                            allowfullscreen>
+                    </iframe>
+                    <div class="project-links">
+                        <a href="https://scratch.mit.edu/projects/1297244057"
+                           target="_blank"
+                           class="btn-scratch btn-play">
+                            🎮 Играть на Scratch
+                        </a>
+                        <a href="Special_forces_Tower_Defens/s.html"
+                           class="btn-scratch"
+                           style="background: var(--scratch-pink); color: white;">
+                            📄 Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>✨ Сделано с ❤️ и блоками Scratch | Кванториум © 2026 ✨</p>
+        </footer>
+    </div>
+
+    <script>
+        // Добавляем интерактивности
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Плавная прокрутка (если понадобится)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

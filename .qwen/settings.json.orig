@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(D:\\CursorProjects\\Landing общий\\Rocket/**)",
+      "Read(D:\\CursorProjects\\Landing общий\\Special_forces_Tower_Defens/**)"
+    ]
+  },
+  "$version": 4
+}
